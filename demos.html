@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demos — Forgio</title>
+  <meta name="description" content="Try Forgio in your industry. Pick a vertical and have a live conversation with the AI pre-sales engineer built for it." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg-soft: #141414;
+      --bg-card: #161616;
+      --fg: #F5F1EB;
+      --fg-muted: #8B857B;
+      --fg-dim: #5A554E;
+      --accent: #FF6B35;
+      --accent-soft: #FFB088;
+      --accent-dim: #2A1810;
+      --border: #1F1F1F;
+      --border-strong: #2A2A2A;
+      --font-display: 'Fraunces', 'Times New Roman', serif;
+      --font-sans: 'Geist', -apple-system, system-ui, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+      --content-width: 1080px;
+      --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    .container {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 10, 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 1.1rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 0.15em;
+    }
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 0.35em;
+      height: 0.35em;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 0.4em;
+      transform: translateY(-0.05em);
+      box-shadow: 0 0 12px rgba(255, 107, 53, 0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.92rem;
+    }
+    .nav-links a {
+      color: var(--fg-muted);
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--fg); }
+
+    .nav-cta {
+      padding: 0.55rem 1.1rem;
+      background: var(--fg);
+      color: var(--bg);
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+    @media (max-width: 720px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: clamp(4rem, 8vw, 6rem) 0 clamp(2rem, 4vw, 3rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.12) 0%, rgba(255, 107, 53, 0) 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--accent-dim);
+      border-radius: 999px;
+      background: rgba(255, 107, 53, 0.04);
+    }
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      font-weight: 380;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30;
+      max-width: 18ch;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 320;
+      color: var(--accent);
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+      line-height: 1.5;
+      color: var(--fg-muted);
+      max-width: 56ch;
+      font-weight: 400;
+    }
+
+    /* ---------- Demo grid ---------- */
+    .demos {
+      padding: clamp(2rem, 4vw, 3rem) 0 clamp(5rem, 10vw, 8rem);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 720px) {
+      .demo-grid { grid-template-columns: 1fr; }
+    }
+
+    .demo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, transform 0.25s, background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .demo-card.live {
+      cursor: pointer;
+    }
+    .demo-card.live:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+      background: #1A1A1A;
+    }
+    .demo-card.live:hover .card-arrow {
+      transform: translate(3px, -3px);
+      color: var(--accent);
+    }
+    .demo-card.coming-soon {
+      opacity: 0.95;
+    }
+
+    .card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 999px;
+      width: fit-content;
+      font-weight: 500;
+    }
+    .card-status.live {
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(255, 107, 53, 0.25);
+    }
+    .card-status.live::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-out infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
+      70% { box-shadow: 0 0 0 7px rgba(255, 107, 53, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+    }
+    .card-status.soon {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--fg-muted);
+      border: 1px solid var(--border-strong);
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 1.75rem;
+      right: 1.75rem;
+      color: var(--fg-muted);
+      transition: transform 0.25s, color 0.25s;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 450;
+      font-variation-settings: 'opsz' 60;
+    }
+
+    .card-body {
+      color: var(--fg-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-footer {
+      padding-top: 0.5rem;
+      border-top: 1px dashed var(--border-strong);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--fg-dim);
+      font-family: var(--font-mono);
+    }
+    .card-footer .live-cta {
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .card-footer .notify {
+      color: var(--fg-muted);
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .card-footer .notify:hover { color: var(--fg); }
+
+    /* Card company preview */
+    .card-company {
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      font-style: italic;
+      margin-top: -0.25rem;
+    }
+
+    /* ---------- Notify modal ---------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: 2rem 1.75rem 1.75rem;
+      max-width: 440px;
+      width: 100%;
+      transform: scale(0.96);
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.2, 1);
+    }
+    .modal-backdrop.open .modal { transform: scale(1); }
+
+    .modal-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .modal h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.75rem;
+      font-weight: 420;
+    }
+    .modal p {
+      color: var(--fg-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+
+    .modal-field {
+      margin-bottom: 0.85rem;
+    }
+    .modal-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      margin-bottom: 5px;
+      letter-spacing: 0.02em;
+    }
+    .modal-field input {
+      width: 100%;
+      padding: 11px 13px;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      transition: border-color 0.15s;
+    }
+    .modal-field input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    .modal-actions button {
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary {
+      flex: 1;
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--fg-muted);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-secondary:hover { color: var(--fg); border-color: var(--fg-muted); }
+
+    .modal-success {
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .modal-success-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 107, 53, 0.12);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin: 0 auto 1.1rem;
+    }
+    .modal-success h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-success p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---------- Back link ---------- */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-muted);
+      font-size: 0.88rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 3rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-mark {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--fg-muted);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4em;
+    }
+    .footer-mark::before {
+      content: '';
+      display: inline-block;
+      width: 0.3em;
+      height: 0.3em;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .footer-meta { text-align: right; line-height: 1.6; }
+    @media (max-width: 600px) { .footer-meta { text-align: left; } }
+    .footer-links { display: flex; gap: 1.25rem; margin-top: 0.4rem; }
+    .footer-links a { color: var(--fg-muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark" aria-label="Forgio home">forgio</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/#who">Who it's for</a>
+      <a href="/demos.html" class="active">Demos</a>
+      <a href="/#cta" class="nav-cta">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <a href="/" class="back-link">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+          <path d="M11 7H3M3 7L7 3M3 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Forgio
+      </a>
+      <span class="eyebrow">Try a live demo</span>
+      <h1>Pick your industry,<br/><em>try Forgio.</em></h1>
+      <p class="hero-sub">
+        Each demo runs the same Forgio engine, configured for a different vertical. Click a live demo to have a real conversation with the AI built for that industry — or get notified when yours goes live.
+      </p>
+    </div>
+  </section>
+
+  <!-- DEMO GRID -->
+  <section class="demos">
+    <div class="container">
+      <div class="demo-grid" id="demo-grid">
+        <!-- Cards populated by JS -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Notify Modal -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-mark">forgio</div>
+        <div style="margin-top: 0.6rem; max-width: 32ch;">The AI pre-sales engineer for industrial businesses. Built in the UK.</div>
+      </div>
+      <div class="footer-meta">
+        <div>© 2026 Forgio Ltd</div>
+        <div class="footer-links">
+          <a href="mailto:hello@forgio.co.uk">Contact</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ====== CONFIG ======
+  const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000'
+    : 'https://forgio-backend-production.up.railway.app';
+
+  // ====== VERTICALS ======
+  const VERTICALS = [
+    {
+      id: 'conveyors',
+      name: 'Conveyors & material handling',
+      description: 'Belt, modular, roller and chain conveyor systems for food, pharma, logistics and bulk industries.',
+      company: 'Demo: Bradfield Conveyors — Sheffield',
+      demoUrl: '/demos/conveyors.html',
+      live: true,
+    },
+    {
+      id: 'refrigeration',
+      name: 'Refrigeration & HVAC',
+      description: 'Commercial and industrial refrigeration, cold stores, air conditioning, heat pumps. F-Gas compliant.',
+      company: 'Demo: Chiltern Cooling — Birmingham',
+      demoUrl: '/demos/refrigeration.html',
+      live: true,
+    },
+    {
+      id: 'fabrication',
+      name: 'Fabrication & metalwork',
+      description: 'Steel and stainless fabrication, structural frames, platforms, bespoke welded metalwork.',
+      live: false,
+    },
+    {
+      id: 'process',
+      name: 'Process equipment & tanks',
+      description: 'Tanks, vessels, mixers, process skids. Food, chemical, and pharmaceutical applications.',
+      live: false,
+    },
+    {
+      id: 'controls',
+      name: 'Industrial controls & automation',
+      description: 'PLC and HMI control systems, motor control centres, bespoke automation builds.',
+      live: false,
+    },
+    {
+      id: 'machinery',
+      name: 'Bespoke machinery',
+      description: 'Custom-engineered equipment and one-off industrial machinery built to client specification.',
+      live: false,
+    },
+  ];
+
+  // ====== RENDER ======
+  const grid = document.getElementById('demo-grid');
+  for (const v of VERTICALS) {
+    const card = document.createElement('div');
+    card.className = 'demo-card ' + (v.live ? 'live' : 'coming-soon');
+    card.innerHTML = `
+      <div class="card-status ${v.live ? 'live' : 'soon'}">${v.live ? 'Live now' : 'Coming soon'}</div>
+      ${v.live ? `
+        <svg class="card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      ` : ''}
+      <h2 class="card-title">${v.name}</h2>
+      ${v.company ? `<div class="card-company">${v.company}</div>` : ''}
+      <p class="card-body">${v.description}</p>
+      <div class="card-footer">
+        ${v.live
+          ? `<span class="live-cta">Try the demo →</span><span>${v.id}</span>`
+          : `<span class="notify" data-vertical="${v.id}" data-name="${v.name}">Notify me →</span><span>${v.id}</span>`
+        }
+      </div>
+    `;
+
+    if (v.live) {
+      card.addEventListener('click', () => {
+        window.location.href = v.demoUrl;
+      });
+    } else {
+      card.querySelector('.notify').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openNotifyModal(v.id, v.name);
+      });
+    }
+
+    grid.appendChild(card);
+  }
+
+  // ====== MODAL ======
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalContent = document.getElementById('modal-content');
+
+  function openNotifyModal(verticalId, verticalName) {
+    modalContent.innerHTML = `
+      <div class="modal-eyebrow">Coming soon</div>
+      <h3>Notify me when ${verticalName} goes live.</h3>
+      <p>We're building Forgio one vertical at a time, with input from real businesses in each industry. Leave your email and we'll let you know when ${verticalName.toLowerCase()} is ready.</p>
+      <div class="modal-field">
+        <label for="notify-email">Email</label>
+        <input id="notify-email" type="email" placeholder="you@example.com" required />
+      </div>
+      <div class="modal-field">
+        <label for="notify-company">Company (optional)</label>
+        <input id="notify-company" type="text" placeholder="Your business" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="modal-cancel">Cancel</button>
+        <button class="btn-primary" id="modal-submit">Notify me</button>
+      </div>
+    `;
+    modalBackdrop.classList.add('open');
+
+    document.getElementById('modal-cancel').addEventListener('click', closeModal);
+    document.getElementById('modal-submit').addEventListener('click', () => submitNotify(verticalId, verticalName));
+    document.getElementById('notify-email').focus();
+  }
+
+  async function submitNotify(verticalId, verticalName) {
+    const email = document.getElementById('notify-email').value.trim();
+    const company = document.getElementById('notify-company').value.trim();
+    const submitBtn = document.getElementById('modal-submit');
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('notify-email').focus();
+      document.getElementById('notify-email').style.borderColor = '#FF6B35';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving...';
+
+    try {
+      const r = await fetch(`${API_URL}/api/leads/notify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          vertical: verticalId,
+          company: company || null,
+          source: 'forgio.co.uk/demos',
+        }),
+      });
+
+      if (!r.ok) throw new Error('Failed to save');
+
+      modalContent.innerHTML = `
+        <div class="modal-success">
+          <div class="modal-success-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12L10 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>You're on the list.</h3>
+          <p>We'll email you the moment ${verticalName} goes live. Usually within a few weeks of signing the first design partner in that vertical.</p>
+          <button class="btn-primary" id="modal-close-success" style="width:100%;">Close</button>
+        </div>
+      `;
+      document.getElementById('modal-close-success').addEventListener('click', closeModal);
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Try again';
+    }
+  }
+
+  function closeModal() {
+    modalBackdrop.classList.remove('open');
+  }
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>

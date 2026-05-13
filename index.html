@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgio — The AI pre-sales engineer for industrial businesses</title>
+  <meta name="description" content="Forgio replaces your contact form with an AI pre-sales engineer. It qualifies enquiries, gathers technical specs, and delivers structured RFQs to your sales team in minutes." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Forgio — The AI pre-sales engineer for industrial businesses" />
+  <meta property="og:description" content="Replace your contact form with an AI that qualifies enquiries and delivers structured, quote-ready RFQs to your sales team." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://forgio.co.uk" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    /* ---------- Reset & Base ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg-soft: #141414;
+      --bg-card: #161616;
+      --fg: #F5F1EB;
+      --fg-muted: #8B857B;
+      --fg-dim: #5A554E;
+      --accent: #FF6B35;
+      --accent-soft: #FFB088;
+      --accent-dim: #2A1810;
+      --border: #1F1F1F;
+      --border-strong: #2A2A2A;
+
+      --font-display: 'Fraunces', 'Times New Roman', serif;
+      --font-sans: 'Geist', -apple-system, system-ui, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+
+      --max-width: 1200px;
+      --content-width: 1080px;
+      --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      font-feature-settings: 'ss01', 'ss02';
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* ---------- Layout ---------- */
+    .container {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    section {
+      padding: clamp(5rem, 10vw, 8rem) 0;
+      position: relative;
+    }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 10, 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 1.1rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      font-feature-settings: 'ss01';
+      display: flex;
+      align-items: baseline;
+      gap: 0.15em;
+    }
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 0.35em;
+      height: 0.35em;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 0.4em;
+      transform: translateY(-0.05em);
+      box-shadow: 0 0 12px rgba(255, 107, 53, 0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.92rem;
+    }
+    .nav-links a {
+      color: var(--fg-muted);
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    .nav-cta {
+      padding: 0.55rem 1.1rem;
+      background: var(--fg);
+      color: var(--bg);
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding-top: clamp(4rem, 8vw, 6rem);
+      padding-bottom: clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.12) 0%, rgba(255, 107, 53, 0) 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--accent-dim);
+      border-radius: 999px;
+      background: rgba(255, 107, 53, 0.04);
+    }
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      font-weight: 380;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30;
+      max-width: 14ch;
+      margin-bottom: 1.75rem;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 320;
+      color: var(--accent);
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      line-height: 1.5;
+      color: var(--fg-muted);
+      max-width: 56ch;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+    .btn-primary .arrow {
+      transition: transform 0.2s ease;
+    }
+    .btn-primary:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg-muted);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-ghost:hover {
+      color: var(--fg);
+      border-color: var(--fg-muted);
+    }
+
+    /* ---------- Transformation Demo ---------- */
+    .transformation {
+      padding-top: 2rem;
+    }
+
+    .transformation-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.5);
+    }
+
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+    @media (max-width: 820px) {
+      .transformation-grid { grid-template-columns: 1fr; }
+    }
+
+    .transformation-side {
+      padding: 2rem 2.25rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-height: 380px;
+    }
+
+    .transformation-side.left {
+      border-right: 1px solid var(--border);
+      background:
+        repeating-linear-gradient(
+          135deg,
+          transparent 0px,
+          transparent 30px,
+          rgba(255, 255, 255, 0.012) 30px,
+          rgba(255, 255, 255, 0.012) 31px
+        );
+    }
+    @media (max-width: 820px) {
+      .transformation-side.left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
+    .side-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .side-label.accent { color: var(--accent); }
+    .side-label::before {
+      content: '';
+      width: 8px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .raw-message {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1.45;
+      color: var(--fg-muted);
+      font-style: italic;
+      font-weight: 360;
+      flex: 1;
+    }
+    .raw-message::before { content: '"'; opacity: 0.4; }
+    .raw-message::after { content: '"'; opacity: 0.4; }
+
+    .raw-meta {
+      font-size: 0.85rem;
+      color: var(--fg-dim);
+      font-family: var(--font-mono);
+    }
+
+    .rfq-output {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .rfq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px dashed var(--border-strong);
+    }
+
+    .rfq-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .score-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--accent);
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .rfq-row {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .rfq-key {
+      font-family: var(--font-mono);
+      color: var(--fg-dim);
+      font-size: 0.78rem;
+      min-width: 95px;
+      padding-top: 0.1rem;
+      letter-spacing: 0.02em;
+    }
+    .rfq-val {
+      color: var(--fg);
+      flex: 1;
+    }
+    .rfq-val .accent { color: var(--accent-soft); }
+
+    /* ---------- Section Headers ---------- */
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30;
+      max-width: 22ch;
+      margin-bottom: 1.5rem;
+    }
+    h2 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 360;
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+
+    .section-sub {
+      font-size: 1.1rem;
+      color: var(--fg-muted);
+      max-width: 58ch;
+      line-height: 1.55;
+    }
+
+    /* ---------- Problem Section ---------- */
+    .problem {
+      border-top: 1px solid var(--border);
+    }
+
+    .problem-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 720px) {
+      .problem-stats { grid-template-columns: 1fr; }
+      .problem-stats > * + * { border-top: 1px solid var(--border); }
+    }
+
+    .stat {
+      padding: 2.25rem 1.75rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    @media (max-width: 720px) {
+      .stat { border-right: none; }
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 6vw, 4rem);
+      line-height: 1;
+      font-weight: 360;
+      letter-spacing: -0.04em;
+      color: var(--fg);
+      margin-bottom: 0.85rem;
+      font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    }
+    .stat-num em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 320;
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+
+    .stat-label {
+      color: var(--fg-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      max-width: 28ch;
+    }
+
+    /* ---------- How It Works ---------- */
+    .how {
+      border-top: 1px solid var(--border);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 4rem;
+    }
+    @media (max-width: 820px) {
+      .steps { grid-template-columns: 1fr; gap: 1rem; }
+    }
+
+    .step {
+      padding: 2rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-card);
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .step:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.85rem;
+      font-weight: 450;
+    }
+
+    .step-body {
+      color: var(--fg-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* ---------- Who It's For ---------- */
+    .who {
+      border-top: 1px solid var(--border);
+    }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    @media (max-width: 720px) {
+      .who-grid { grid-template-columns: 1fr; }
+    }
+
+    .who-cell {
+      padding: 1.75rem 1.5rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.2s ease;
+    }
+    .who-cell:hover {
+      background: var(--bg-card);
+    }
+
+    .who-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+      font-weight: 450;
+    }
+    .who-desc {
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* ---------- Founder ---------- */
+    .founder {
+      border-top: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse at top right, rgba(255, 107, 53, 0.06) 0%, rgba(255, 107, 53, 0) 50%);
+    }
+
+    .founder-inner {
+      max-width: 60ch;
+    }
+
+    .founder-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      color: var(--fg);
+      font-weight: 380;
+      margin-bottom: 2rem;
+      font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    }
+    .founder-quote em {
+      color: var(--accent);
+      font-style: italic;
+      font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    }
+
+    .founder-byline {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.92rem;
+      color: var(--fg-muted);
+    }
+    .founder-name {
+      color: var(--fg);
+      font-weight: 500;
+    }
+    .founder-byline .sep {
+      color: var(--fg-dim);
+    }
+
+    /* ---------- Final CTA ---------- */
+    .final-cta {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding-top: clamp(5rem, 10vw, 7rem);
+      padding-bottom: clamp(5rem, 10vw, 7rem);
+    }
+
+    .final-cta h2 {
+      max-width: 18ch;
+      margin: 0 auto 1.25rem;
+    }
+    .final-cta .section-sub {
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+    .final-cta .hero-cta-row {
+      justify-content: center;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 3rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-mark {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--fg-muted);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4em;
+    }
+    .footer-mark::before {
+      content: '';
+      display: inline-block;
+      width: 0.3em;
+      height: 0.3em;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .footer-meta { text-align: right; line-height: 1.6; }
+    @media (max-width: 600px) {
+      .footer-meta { text-align: left; }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 0.4rem;
+    }
+    .footer-links a {
+      color: var(--fg-muted);
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: var(--fg); }
+
+    /* ---------- Animations ---------- */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hero .eyebrow { animation: fade 0.8s 0.1s ease both; }
+    .hero h1 { animation: rise 0.9s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .hero-sub { animation: rise 0.9s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .hero-cta-row { animation: rise 0.9s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .transformation-card { animation: rise 1s 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+    /* Scroll-triggered (simple) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="wordmark" aria-label="Forgio home">forgio</a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#who">Who it's for</a>
+        <a href="/demos.html">Demos</a>
+        <a href="#founder">About</a>
+        <a href="#cta" class="nav-cta">Book a call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <span class="eyebrow">AI for industrial pre-sales</span>
+        <h1>Every enquiry,<br/><em>quote-ready.</em></h1>
+        <p class="hero-sub">
+          Forgio replaces your contact form with an AI pre-sales engineer. It qualifies enquiries, gathers technical specs, and delivers structured RFQs to your sales team — so you quote in hours, not weeks.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#cta" class="btn btn-primary">
+            Book a 20-min demo
+            <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/demos.html" class="btn btn-ghost">Try it yourself →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSFORMATION DEMO -->
+    <section id="transformation" class="transformation">
+      <div class="container">
+        <div class="transformation-card reveal">
+          <div class="transformation-grid">
+            <!-- Before -->
+            <div class="transformation-side left">
+              <div class="side-label">What you get today</div>
+              <p class="raw-message">Hi, can you help with a conveyor for our biscuit factory?</p>
+              <div class="raw-meta">— sent via contact form, 09:14</div>
+            </div>
+            <!-- After -->
+            <div class="transformation-side right">
+              <div class="side-label accent">What Forgio delivers</div>
+              <div class="rfq-output">
+                <div class="rfq-header">
+                  <div>
+                    <div class="rfq-title">Stainless steel modular belt conveyor</div>
+                    <div style="font-size: 0.82rem; color: var(--fg-muted); margin-top: 0.3rem;">Acme Foods Ltd — John Smith, Operations</div>
+                  </div>
+                  <div class="score-pill">87 / 100</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Dimensions</div>
+                  <div class="rfq-val">8m length × 600mm width</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Throughput</div>
+                  <div class="rfq-val">30 packs/min, 200g each</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Environment</div>
+                  <div class="rfq-val">IP69K washdown, allergen-controlled</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Timeline</div>
+                  <div class="rfq-val"><span class="accent">Required in 8 weeks</span> — new product launch</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Drawings</div>
+                  <div class="rfq-val">2 attached — factory layout, existing line</div>
+                </div>
+                <div class="rfq-row">
+                  <div class="rfq-key">Missing</div>
+                  <div class="rfq-val" style="color: var(--fg-muted);">Floor anchor type, electrical supply spec</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">The problem</div>
+          <h2>Contact forms cost you <em>real money</em>.</h2>
+          <p class="section-sub">
+            A vague enquiry isn't a lead — it's a research project. Your sales engineers spend hours chasing details that should have been gathered upfront, while your competitors are already quoting.
+          </p>
+        </div>
+
+        <div class="problem-stats reveal">
+          <div class="stat">
+            <div class="stat-num">4–6<em>hrs</em></div>
+            <div class="stat-label">spent qualifying each enquiry before a quote can begin</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">62<em>%</em></div>
+            <div class="stat-label">of enquiries arrive missing specs, drawings, or timelines</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3×</div>
+            <div class="stat-label">faster quote turnaround when buyers receive structured intake</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="how">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">How it works</div>
+          <h2>A junior pre-sales engineer<br/>on <em>every enquiry</em>.</h2>
+          <p class="section-sub">
+            Forgio embeds on your site as a single line of code. From there, it does what your best sales engineer would do — only it never sleeps and never forgets to ask.
+          </p>
+        </div>
+
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-num">01 / Intake</div>
+            <h3 class="step-title">Customer starts an enquiry</h3>
+            <p class="step-body">No more empty textbox. Forgio greets them, asks what they need, and immediately begins routing into the right technical question flow.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02 / Qualify</div>
+            <h3 class="step-title">AI asks the right questions</h3>
+            <p class="step-body">Dimensions, materials, environment, timeline, decision-maker. It adapts to the answers, requests drawings where needed, and never misses a critical spec.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03 / Deliver</div>
+            <h3 class="step-title">Sales receives a structured RFQ</h3>
+            <p class="step-body">A clean brief lands in your inbox or CRM — specs, attachments, missing fields flagged, lead score attached. Ready for your engineers to quote.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section id="who" class="who">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">Who it's for</div>
+          <h2>Built for industrial businesses<br/>that <em>quote complex projects</em>.</h2>
+        </div>
+
+        <div class="who-grid reveal">
+          <div class="who-cell">
+            <div class="who-title">Conveyor &amp; machinery manufacturers</div>
+            <div class="who-desc">Bespoke systems with hundreds of variables — Forgio captures them all upfront.</div>
+          </div>
+          <div class="who-cell">
+            <div class="who-title">Fabrication &amp; machining</div>
+            <div class="who-desc">Drawings, tolerances, materials, finish. No more "send me the file" back-and-forth.</div>
+          </div>
+          <div class="who-cell">
+            <div class="who-title">Industrial equipment suppliers</div>
+            <div class="who-desc">Application, environment, integration — qualified before the call, not during it.</div>
+          </div>
+          <div class="who-cell">
+            <div class="who-title">Custom engineering firms</div>
+            <div class="who-desc">Scope, budget, timeline, decision-maker — every brief lands quote-ready.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER -->
+    <section id="founder" class="founder">
+      <div class="container">
+        <div class="founder-inner reveal">
+          <div class="section-eyebrow">From the founder</div>
+          <p class="founder-quote">
+            I've watched good engineering businesses lose hours every week qualifying enquiries that should have arrived already structured. <em>Forgio is the tool I wish they'd had.</em>
+          </p>
+          <div class="founder-byline">
+            <span class="founder-name">James O'Flynn</span>
+            <span class="sep">·</span>
+            <span>Founder, Forgio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="cta" class="final-cta">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow" style="margin-bottom: 1rem;">Ready when you are</div>
+          <h2>See Forgio<br/>on <em>your enquiries</em>.</h2>
+          <p class="section-sub">
+            Twenty minutes, no slides. Send us a few of your recent enquiries and we'll show you what Forgio would have made of them.
+          </p>
+          <div class="hero-cta-row">
+            <a href="mailto:hello@forgio.co.uk?subject=Forgio%20demo%20request" class="btn btn-primary">
+              Book a 20-min demo
+              <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="mailto:hello@forgio.co.uk" class="btn btn-ghost">hello@forgio.co.uk</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-mark">forgio</div>
+          <div style="margin-top: 0.6rem; max-width: 32ch;">The AI pre-sales engineer for industrial businesses. Built in the UK.</div>
+        </div>
+        <div class="footer-meta">
+          <div>© 2026 Forgio Ltd</div>
+          <div class="footer-links">
+            <a href="mailto:hello@forgio.co.uk">Contact</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
