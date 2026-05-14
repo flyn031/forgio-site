@@ -22,7 +22,6 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
 
   <style>
-    /* ---------- Reset & Base ---------- */
     *,
     *::before,
     *::after {
@@ -75,7 +74,6 @@
 
     ::selection { background: var(--accent); color: var(--bg); }
 
-    /* ---------- Layout ---------- */
     .container {
       max-width: var(--content-width);
       margin: 0 auto;
@@ -347,13 +345,13 @@
       font-family: var(--font-display);
       font-size: 1.4rem;
       line-height: 1.45;
-      color: var(--fg-muted);
+      color: var(--fg);
       font-style: italic;
       font-weight: 360;
       flex: 1;
     }
-    .raw-message::before { content: '"'; opacity: 0.4; }
-    .raw-message::after { content: '"'; opacity: 0.4; }
+    .raw-message::before { content: '"'; opacity: 0.5; }
+    .raw-message::after { content: '"'; opacity: 0.5; }
 
     .raw-meta {
       font-size: 0.85rem;
@@ -721,7 +719,6 @@
     .hero-cta-row { animation: rise 0.9s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
     .transformation-card { animation: rise 1s 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
-    /* Scroll-triggered (simple) */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -744,7 +741,6 @@
         <a href="#who">Who it's for</a>
         <a href="/demos.html">Demos</a>
         <a href="/pricing.html">Pricing</a>
-        <a href="#founder">About</a>
         <a href="https://calendly.com/jimmyflyn031/30min" class="nav-cta">Book a call</a>
       </div>
     </div>
@@ -760,7 +756,7 @@
           Forgio replaces your contact form with an AI pre-sales engineer. It qualifies enquiries, gathers technical specs, and delivers structured RFQs to your sales team — so you quote in hours, not weeks.
         </p>
         <div class="hero-cta-row">
-          <a href="#cta" class="btn btn-primary">
+          <a href="https://calendly.com/jimmyflyn031/30min" class="btn btn-primary">
             Book a 20-min demo
             <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -779,7 +775,7 @@
             <!-- Before -->
             <div class="transformation-side left">
               <div class="side-label">What you get today</div>
-              <p class="raw-message">Hi, can you help with a conveyor for our biscuit factory?</p>
+              <p class="raw-message">We need a new cold store for our warehouse — can someone call me back?</p>
               <div class="raw-meta">— sent via contact form, 09:14</div>
             </div>
             <!-- After -->
@@ -788,34 +784,34 @@
               <div class="rfq-output">
                 <div class="rfq-header">
                   <div>
-                    <div class="rfq-title">Stainless steel modular belt conveyor</div>
-                    <div style="font-size: 0.82rem; color: var(--fg-muted); margin-top: 0.3rem;">Acme Foods Ltd — John Smith, Operations</div>
+                    <div class="rfq-title">Walk-in cold store, 120m² warehouse install</div>
+                    <div style="font-size: 0.82rem; color: var(--fg-muted); margin-top: 0.3rem;">Westfield Distribution Ltd — Mark Taylor, Operations</div>
                   </div>
-                  <div class="score-pill">87 / 100</div>
+                  <div class="score-pill">91 / 100</div>
                 </div>
                 <div class="rfq-row">
                   <div class="rfq-key">Dimensions</div>
-                  <div class="rfq-val">8m length × 600mm width</div>
+                  <div class="rfq-val">12m × 10m × 4.5m height</div>
                 </div>
                 <div class="rfq-row">
-                  <div class="rfq-key">Throughput</div>
-                  <div class="rfq-val">30 packs/min, 200g each</div>
+                  <div class="rfq-key">Temperature</div>
+                  <div class="rfq-val">-21°C frozen storage, dual zone</div>
                 </div>
                 <div class="rfq-row">
-                  <div class="rfq-key">Environment</div>
-                  <div class="rfq-val">IP69K washdown, allergen-controlled</div>
+                  <div class="rfq-key">Compliance</div>
+                  <div class="rfq-val">F-Gas, REFCOM, BRC Grade A</div>
                 </div>
                 <div class="rfq-row">
                   <div class="rfq-key">Timeline</div>
-                  <div class="rfq-val"><span class="accent">Required in 8 weeks</span> — new product launch</div>
+                  <div class="rfq-val"><span class="accent">Required by September</span> — new contract start</div>
                 </div>
                 <div class="rfq-row">
                   <div class="rfq-key">Drawings</div>
-                  <div class="rfq-val">2 attached — factory layout, existing line</div>
+                  <div class="rfq-val">1 attached — warehouse floor plan</div>
                 </div>
                 <div class="rfq-row">
                   <div class="rfq-key">Missing</div>
-                  <div class="rfq-val" style="color: var(--fg-muted);">Floor anchor type, electrical supply spec</div>
+                  <div class="rfq-val" style="color: var(--fg-muted);">Electrical supply capacity, door spec preference</div>
                 </div>
               </div>
             </div>
@@ -859,7 +855,7 @@
           <div class="section-eyebrow">How it works</div>
           <h2>A junior pre-sales engineer<br/>on <em>every enquiry</em>.</h2>
           <p class="section-sub">
-            Forgio embeds on your site as a single line of code. From there, it does what your best sales engineer would do — only it never sleeps and never forgets to ask.
+            Forgio drops into your website in minutes. From there, it does what your best sales engineer would do — only it never sleeps and never forgets to ask.
           </p>
         </div>
 
@@ -888,25 +884,25 @@
       <div class="container">
         <div class="reveal">
           <div class="section-eyebrow">Who it's for</div>
-          <h2>Built for industrial businesses<br/>that <em>quote complex projects</em>.</h2>
+          <h2>Built for businesses that <em>design, build, and install</em>.</h2>
         </div>
 
         <div class="who-grid reveal">
           <div class="who-cell">
-            <div class="who-title">Conveyor &amp; machinery manufacturers</div>
-            <div class="who-desc">Bespoke systems with hundreds of variables — Forgio captures them all upfront.</div>
+            <div class="who-title">Manufacturers &amp; fabricators</div>
+            <div class="who-desc">Steel, stainless, sheet metal, machined parts — Forgio captures every spec, tolerance, and finish before you lift a finger.</div>
           </div>
           <div class="who-cell">
-            <div class="who-title">Fabrication &amp; machining</div>
-            <div class="who-desc">Drawings, tolerances, materials, finish. No more "send me the file" back-and-forth.</div>
+            <div class="who-title">Machinery &amp; systems builders</div>
+            <div class="who-desc">Conveyors, packaging lines, process equipment, automation — complex builds with hundreds of variables, qualified upfront.</div>
           </div>
           <div class="who-cell">
-            <div class="who-title">Industrial equipment suppliers</div>
-            <div class="who-desc">Application, environment, integration — qualified before the call, not during it.</div>
+            <div class="who-title">Building services contractors</div>
+            <div class="who-desc">Refrigeration, HVAC, electrical, fire protection — compliance requirements, site conditions, and project scope gathered automatically.</div>
           </div>
           <div class="who-cell">
-            <div class="who-title">Custom engineering firms</div>
-            <div class="who-desc">Scope, budget, timeline, decision-maker — every brief lands quote-ready.</div>
+            <div class="who-title">Industrial service providers</div>
+            <div class="who-desc">Maintenance, calibration, plant services — scope, access, scheduling, and urgency captured before the first call.</div>
           </div>
         </div>
       </div>
@@ -936,16 +932,16 @@
           <div class="section-eyebrow" style="margin-bottom: 1rem;">Ready when you are</div>
           <h2>See Forgio<br/>on <em>your enquiries</em>.</h2>
           <p class="section-sub">
-            Twenty minutes, no slides. Send us a few of your recent enquiries and we'll show you what Forgio would have made of them.
+            Book a 20-minute demo. No slides, no sales pitch — just your real enquiries, processed live by the AI. You'll see exactly what your sales team would receive.
           </p>
           <div class="hero-cta-row">
-            <a href="mailto:hello@forgio.co.uk?subject=Forgio%20demo%20request" class="btn btn-primary">
+            <a href="https://calendly.com/jimmyflyn031/30min" class="btn btn-primary">
               Book a 20-min demo
               <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
-            <a href="mailto:hello@forgio.co.uk" class="btn btn-ghost">hello@forgio.co.uk</a>
+            <a href="mailto:james@forgio.co.uk" class="btn btn-ghost">james@forgio.co.uk</a>
           </div>
         </div>
       </div>
@@ -963,7 +959,7 @@
         <div class="footer-meta">
           <div>© 2026 Forgio Ltd</div>
           <div class="footer-links">
-            <a href="mailto:hello@forgio.co.uk">Contact</a>
+            <a href="mailto:james@forgio.co.uk">Contact</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms</a>
           </div>
@@ -973,7 +969,6 @@
   </footer>
 
   <script>
-    // Simple scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
