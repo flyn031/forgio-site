@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Pennine Steel Fabrications — Structural & bespoke fabrication, Rotherham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%224%22 fill=%22%231a1a2e%22/><text x=%2216%22 y=%2223%22 font-family=%22serif%22 font-size=%2220%22 font-weight=%22700%22 fill=%22%23e8b04a%22 text-anchor=%22middle%22>P</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1a1a2e;--gold:#e8b04a;--gold-light:#f0c96e;--cream:#faf8f4;--warm:#f5f0e6;--text:#1a1a1a;--muted:#6b6b6b;--rule:#ddd5c4;--max:1140px;--g:clamp(1.25rem,4vw,2.5rem)}
+body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.c{max-width:var(--max);margin:0 auto;padding-left:var(--g);padding-right:var(--g)}
+
+/* Demo banner */
+.demo-banner{background:var(--navy);color:var(--cream);text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.04em}
+.demo-banner a{color:var(--gold);text-decoration:underline}
+
+/* Top bar */
+.topbar{background:#111122;color:rgba(255,255,255,.8);font-size:13px;padding:8px 0}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center}
+.topbar a{color:rgba(255,255,255,.8)}
+
+/* Nav */
+nav{background:var(--navy);border-bottom:3px solid var(--gold)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:2rem}
+.logo{display:flex;align-items:baseline;gap:10px;color:white}
+.logo-mark{font-family:'DM Serif Display',serif;font-size:30px;color:var(--gold)}
+.logo-text{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;letter-spacing:.01em}
+.logo-sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
+.nav-links a{color:rgba(255,255,255,.85);padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s}
+.nav-links a:hover,.nav-links a.active{color:white;border-bottom-color:var(--gold)}
+@media(max-width:780px){.nav-links{display:none}}
+
+/* Hero */
+.hero{background:var(--navy);color:white;padding:56px 0 72px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(232,176,74,.08),transparent 55%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center}
+@media(max-width:780px){.hero-inner{grid-template-columns:1fr;gap:2rem}}
+.hero-eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:1.2rem}
+.hero-sub{font-size:16px;line-height:1.6;color:rgba(255,255,255,.75);max-width:50ch;margin-bottom:2rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:14px;font-weight:600;border-radius:2px;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-ghost{color:white;border-color:rgba(255,255,255,.25)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Hero figure */
+.hero-fig{background:#111122;border:1px solid rgba(255,255,255,.08);padding:2rem;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.hero-fig svg{width:100%;height:100%}
+
+/* Stats */
+.stats{background:var(--warm);padding:48px 0;border-bottom:1px solid var(--rule)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule)}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:24px;background:var(--cream);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--navy);line-height:1;margin-bottom:6px}
+.stat-num span{font-size:16px;color:var(--gold)}
+.stat-label{font-size:13px;color:var(--muted)}
+
+/* Sectors */
+section.std{padding:72px 0}
+.section-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:var(--navy);margin-bottom:16px;max-width:24ch}
+.section-lede{color:var(--muted);font-size:15px;line-height:1.6;max-width:56ch;margin-bottom:40px}
+.sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule)}
+@media(max-width:780px){.sectors{grid-template-columns:1fr}}
+.sector{background:var(--cream);padding:28px 24px}
+.sector:hover{background:var(--warm)}
+.sector h3{font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);margin-bottom:6px}
+.sector p{font-size:14px;color:var(--muted);line-height:1.5}
+
+/* Contact */
+.contact{padding:72px 0;border-top:1px solid var(--rule)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+@media(max-width:780px){.contact-grid{grid-template-columns:1fr;gap:2rem}}
+.contact-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--navy);margin-bottom:16px;max-width:18ch}
+.contact-body{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:24px}
+.contact-row{display:flex;gap:16px;font-size:14px;padding:10px 0;border-top:1px solid var(--rule)}
+.contact-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:80px;padding-top:2px}
+.contact-value strong{display:block;color:var(--navy);font-weight:600}
+.contact-value span{color:var(--muted);font-size:13px}
+
+.form-hint{margin-top:20px;padding:14px;background:rgba(232,176,74,.08);border-left:2px solid var(--gold);font-size:13px;color:var(--navy);line-height:1.5}
+.form-hint strong{font-weight:600}
+
+/* Footer */
+footer{background:#111122;color:rgba(255,255,255,.5);padding:40px 0 28px;font-size:13px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer a{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Forgio demo</strong> · This is a fictional company. The AI chat in the bottom-right is real — <a href="https://forgio.co.uk">back to Forgio</a>
+</div>
+
+<div class="topbar"><div class="c topbar-inner">
+  <div>☏ +44 (0) 1709 555 200 · Mon–Fri, 7am–5pm</div>
+  <div>BS EN 1090 · CE Marked · ISO 9001 · ISO 3834-2</div>
+</div></div>
+
+<nav><div class="c nav-inner">
+  <a href="#" class="logo">
+    <span class="logo-mark">P</span>
+    <div><div class="logo-text">Pennine Steel Fabrications</div><div class="logo-sub">Rotherham · Est. 1978</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="#">Capabilities</a>
+    <a href="#">Sectors</a>
+    <a href="#">Projects</a>
+    <a href="#contact" class="active">Get a quote</a>
+  </div>
+</div></nav>
+
+<section class="hero"><div class="c"><div class="hero-inner">
+  <div>
+    <div class="hero-eyebrow">Structural & bespoke steel fabrication</div>
+    <h1>Steel fabrication, built to spec in South Yorkshire.</h1>
+    <p class="hero-sub">We design, fabricate and deliver structural steelwork, bespoke metalwork, and precision assemblies for construction, industrial, and commercial clients. BS EN 1090 certified, CE/UKCA marked.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#contact" class="btn btn-gold">Get a quote →</a>
+      <a href="#" class="btn btn-ghost">View our projects</a>
+    </div>
+  </div>
+  <div class="hero-fig">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0L0 0 0 20" fill="none" stroke="rgba(232,176,74,.06)" stroke-width=".5"/></pattern></defs>
+      <rect width="400" height="400" fill="url(#g)"/>
+      <g stroke="#e8b04a" stroke-width="1.5" fill="none">
+        <rect x="80" y="100" width="240" height="200" rx="2"/>
+        <line x1="80" y1="200" x2="320" y2="200"/>
+        <line x1="200" y1="100" x2="200" y2="300"/>
+        <line x1="80" y1="100" x2="200" y2="200"/>
+        <line x1="200" y1="100" x2="320" y2="200"/>
+        <line x1="80" y1="200" x2="200" y2="300"/>
+        <line x1="200" y1="200" x2="320" y2="300"/>
+        <rect x="60" y="300" width="280" height="16" rx="1"/>
+        <line x1="100" y1="316" x2="100" y2="360"/>
+        <line x1="300" y1="316" x2="300" y2="360"/>
+        <line x1="85" y1="360" x2="115" y2="360"/>
+        <line x1="285" y1="360" x2="315" y2="360"/>
+        <line x1="30" y1="370" x2="370" y2="370" stroke-dasharray="3 3"/>
+      </g>
+      <g fill="rgba(232,176,74,.6)" font-family="monospace" font-size="9">
+        <text x="200" y="55" text-anchor="middle">STRUCTURAL FRAME · GA-1200</text>
+        <text x="200" y="390" text-anchor="middle">DRG. PSF/SF-1200/REV-3</text>
+      </g>
+    </svg>
+  </div>
+</div></div></section>
+
+<div class="stats"><div class="c">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">3,200<span>+</span></div><div class="stat-label">Fabricated structures delivered across the UK</div></div>
+    <div class="stat"><div class="stat-num">12,000<span>m²</span></div><div class="stat-label">Workshop facility in Rotherham, South Yorkshire</div></div>
+    <div class="stat"><div class="stat-num">97<span>%</span></div><div class="stat-label">On-time delivery, last 24 months</div></div>
+    <div class="stat"><div class="stat-num">46</div><div class="stat-label">Years in structural and bespoke fabrication</div></div>
+  </div>
+</div></div>
+
+<section class="std"><div class="c">
+  <div class="section-eyebrow">— Capabilities</div>
+  <h2 class="section-title">From steel frames to precision assemblies.</h2>
+  <p class="section-lede">We work across structural, architectural, and bespoke fabrication — mild steel, stainless, and aluminium. CE/UKCA marked to BS EN 1090, with coded welders and full NDT capability.</p>
+  <div class="sectors">
+    <div class="sector"><h3>Structural steelwork</h3><p>Portal frames, mezzanines, trusses, columns and beams. BS EN 1090 EXC2/3/4.</p></div>
+    <div class="sector"><h3>Architectural metalwork</h3><p>Balustrades, staircases, canopies, feature steelwork. Polished, brushed or powder-coated finishes.</p></div>
+    <div class="sector"><h3>Bespoke fabrication</h3><p>Tanks, hoppers, chutes, guards, enclosures, brackets. One-offs and small batches.</p></div>
+    <div class="sector"><h3>Sheet metal</h3><p>Laser cutting, folding, punching and welded assemblies. Mild steel, stainless and aluminium.</p></div>
+    <div class="sector"><h3>Coded & pressure work</h3><p>Pressure vessels, pipework, coded welding to PD 5500 and ASME VIII.</p></div>
+    <div class="sector"><h3>Site installation</h3><p>Erection, modification, and repair. CSCS-carded teams, RAMS and lift plans provided.</p></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="c">
+  <div class="contact-grid">
+    <div>
+      <div class="section-eyebrow">— Get in touch</div>
+      <h2 class="contact-title">Tell us about your project.</h2>
+      <p class="contact-body">Whether you're tendering a structural package, pricing a one-off fabrication, or need a repair on site — our estimating team are ready to help.</p>
+      <div class="contact-row"><div class="contact-label">Phone</div><div class="contact-value"><strong>+44 (0) 1709 555 200</strong><span>Mon–Fri, 7am–5pm</span></div></div>
+      <div class="contact-row"><div class="contact-label">Email</div><div class="contact-value"><strong>enquiries@penninesteel.example</strong><span>Quotes, projects, service</span></div></div>
+      <div class="contact-row"><div class="contact-label">Visit</div><div class="contact-value"><strong>Aldwarke Lane, Rotherham, S65 3SJ</strong><span>By appointment</span></div></div>
+      <div class="form-hint"><strong>Try the assistant.</strong> Click the chat button in the corner — it gathers the technical details our estimators need so we can quote you faster.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--rule);padding:32px;border-radius:2px;">
+      <div class="section-eyebrow">— Send an enquiry</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:18px">Or use the form</h3>
+      <form onsubmit="event.preventDefault();alert('This is a demo site. Try the Forgio assistant in the bottom-right corner.')">
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">Name</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">Company</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px"/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">Email</label><input type="email" style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">Project details</label><textarea style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px;min-height:80px;resize:vertical" placeholder="Tell us about your project..."></textarea></div>
+        <button type="submit" style="width:100%;padding:11px;background:var(--navy);color:white;font-size:14px;font-weight:600;border:none;border-radius:2px;cursor:pointer">Send enquiry</button>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="c"><div class="footer-inner">
+  <div>© 2026 Pennine Steel Fabrications Ltd · Company No. 01423876 · VAT GB 338 2210 45</div>
+  <div>Demo site · powered by <a href="https://forgio.co.uk">Forgio</a></div>
+</div></div></footer>
+
+<script src="https://forgio.co.uk/widget.js"
+  data-api-url="https://forgio-backend-production.up.railway.app"
+  data-template="fabrication"
+  data-demo="true"
+  data-tenant="pennine-steel-demo"
+  data-launcher-text="Get a quote"
+></script>
+</body>
+</html>

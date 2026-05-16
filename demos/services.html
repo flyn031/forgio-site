@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Atlas Industrial Services — Plant maintenance & service, Manchester</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%224%22 fill=%22%230d3b2e%22/><text x=%2216%22 y=%2223%22 font-family=%22serif%22 font-size=%2220%22 font-weight=%22700%22 fill=%22%2348b89c%22 text-anchor=%22middle%22>A</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dark:#0d3b2e;--dark2:#082a20;--accent:#48b89c;--accent-light:#6dd4b8;--cream:#faf9f7;--warm:#f0eeea;--text:#1a1a1a;--muted:#6b6b6b;--rule:#d8d4cc;--max:1140px;--g:clamp(1.25rem,4vw,2.5rem)}
+body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.c{max-width:var(--max);margin:0 auto;padding-left:var(--g);padding-right:var(--g)}
+
+.demo-banner{background:var(--dark);color:var(--cream);text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.04em}
+.demo-banner a{color:var(--accent);text-decoration:underline}
+
+.topbar{background:var(--dark2);color:rgba(255,255,255,.8);font-size:13px;padding:8px 0}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center}
+
+nav{background:var(--dark);border-bottom:3px solid var(--accent)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:2rem}
+.logo{display:flex;align-items:baseline;gap:10px;color:white}
+.logo-mark{font-family:'DM Serif Display',serif;font-size:30px;color:var(--accent)}
+.logo-text{font-family:'DM Serif Display',serif;font-size:18px}
+.logo-sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
+.nav-links a{color:rgba(255,255,255,.85);padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s}
+.nav-links a:hover,.nav-links a.active{color:white;border-bottom-color:var(--accent)}
+@media(max-width:780px){.nav-links{display:none}}
+
+.hero{background:var(--dark);color:white;padding:56px 0 72px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(72,184,156,.1),transparent 55%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center}
+@media(max-width:780px){.hero-inner{grid-template-columns:1fr;gap:2rem}}
+.hero-eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:1.2rem}
+.hero-sub{font-size:16px;line-height:1.6;color:rgba(255,255,255,.75);max-width:50ch;margin-bottom:2rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:14px;font-weight:600;border-radius:2px;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn-accent{background:var(--accent);color:var(--dark)}
+.btn-accent:hover{background:var(--accent-light);transform:translateY(-1px)}
+.btn-ghost{color:white;border-color:rgba(255,255,255,.25)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero-fig{background:var(--dark2);border:1px solid rgba(255,255,255,.08);padding:2rem;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+
+.stats{background:var(--warm);padding:48px 0;border-bottom:1px solid var(--rule)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule)}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:24px;background:var(--cream);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark);line-height:1;margin-bottom:6px}
+.stat-num span{font-size:16px;color:var(--accent)}
+.stat-label{font-size:13px;color:var(--muted)}
+
+section.std{padding:72px 0}
+.section-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;color:var(--dark);margin-bottom:16px;max-width:24ch}
+.section-lede{color:var(--muted);font-size:15px;line-height:1.6;max-width:56ch;margin-bottom:40px}
+.sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule)}
+@media(max-width:780px){.sectors{grid-template-columns:1fr}}
+.sector{background:var(--cream);padding:28px 24px}
+.sector:hover{background:var(--warm)}
+.sector h3{font-family:'DM Serif Display',serif;font-size:18px;color:var(--dark);margin-bottom:6px}
+.sector p{font-size:14px;color:var(--muted);line-height:1.5}
+
+.contact{padding:72px 0;border-top:1px solid var(--rule)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+@media(max-width:780px){.contact-grid{grid-template-columns:1fr;gap:2rem}}
+.contact-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--dark);margin-bottom:16px;max-width:18ch}
+.contact-body{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:24px}
+.contact-row{display:flex;gap:16px;font-size:14px;padding:10px 0;border-top:1px solid var(--rule)}
+.contact-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:80px;padding-top:2px}
+.contact-value strong{display:block;color:var(--dark);font-weight:600}
+.contact-value span{color:var(--muted);font-size:13px}
+
+.form-hint{margin-top:20px;padding:14px;background:rgba(72,184,156,.08);border-left:2px solid var(--accent);font-size:13px;color:var(--dark);line-height:1.5}
+.form-hint strong{font-weight:600}
+
+.emergency{background:var(--dark);color:white;padding:48px 0;text-align:center}
+.emergency h2{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:12px}
+.emergency p{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:20px;max-width:50ch;margin-left:auto;margin-right:auto}
+.emergency-phone{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--accent);letter-spacing:.02em}
+
+footer{background:var(--dark2);color:rgba(255,255,255,.5);padding:40px 0 28px;font-size:13px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Forgio demo</strong> · This is a fictional company. The AI chat in the bottom-right is real — <a href="https://forgio.co.uk">back to Forgio</a>
+</div>
+
+<div class="topbar"><div class="c topbar-inner">
+  <div>☏ 24/7 Emergency: 0800 555 999 · Office: +44 (0) 161 555 400</div>
+  <div>SafeContractor · CHAS · ISO 9001 · ISO 45001</div>
+</div></div>
+
+<nav><div class="c nav-inner">
+  <a href="#" class="logo">
+    <span class="logo-mark">A</span>
+    <div><div class="logo-text">Atlas Industrial Services</div><div class="logo-sub">Manchester · Est. 1995</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="#">Services</a>
+    <a href="#">Sectors</a>
+    <a href="#">About</a>
+    <a href="#contact" class="active">Get in touch</a>
+  </div>
+</div></nav>
+
+<section class="hero"><div class="c"><div class="hero-inner">
+  <div>
+    <div class="hero-eyebrow">Industrial maintenance & service</div>
+    <h1>Keeping UK industry running, around the clock.</h1>
+    <p class="hero-sub">Planned maintenance contracts, emergency breakdown response, statutory inspections, and equipment upgrades across manufacturing, logistics, food production, and process industries. 24/7 coverage, nationwide.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#contact" class="btn btn-accent">Request a quote →</a>
+      <a href="#" class="btn btn-ghost">Our service plans</a>
+    </div>
+  </div>
+  <div class="hero-fig">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0L0 0 0 20" fill="none" stroke="rgba(72,184,156,.06)" stroke-width=".5"/></pattern></defs>
+      <rect width="400" height="400" fill="url(#g)"/>
+      <g stroke="#48b89c" stroke-width="1.5" fill="none">
+        <rect x="100" y="120" width="200" height="160" rx="8"/>
+        <circle cx="200" cy="200" r="50"/>
+        <circle cx="200" cy="200" r="20"/>
+        <circle cx="200" cy="200" r="4" fill="#48b89c"/>
+        <line x1="200" y1="150" x2="200" y2="170"/>
+        <line x1="200" y1="230" x2="200" y2="250"/>
+        <line x1="150" y1="200" x2="170" y2="200"/>
+        <line x1="230" y1="200" x2="250" y2="200"/>
+        <path d="M165 165L178 178M222 178L235 165M178 222L165 235M235 235L222 222" stroke-width="1"/>
+        <rect x="140" y="290" width="120" height="24" rx="3"/>
+        <line x1="160" y1="296" x2="160" y2="308" stroke-width="2"/>
+        <line x1="180" y1="294" x2="180" y2="310" stroke-width="2"/>
+        <line x1="200" y1="296" x2="200" y2="308" stroke-width="2"/>
+        <line x1="220" y1="294" x2="220" y2="310" stroke-width="2"/>
+        <line x1="240" y1="296" x2="240" y2="308" stroke-width="2"/>
+        <path d="M150 120L150 100L250 100L250 120" stroke-dasharray="3 3"/>
+      </g>
+      <g fill="rgba(72,184,156,.6)" font-family="monospace" font-size="9">
+        <text x="200" y="60" text-anchor="middle">SERVICE OVERVIEW · ASSET MONITORING</text>
+        <text x="200" y="385" text-anchor="middle">ATLAS / PPM-SCHEDULE / REV-4</text>
+      </g>
+    </svg>
+  </div>
+</div></div></section>
+
+<div class="stats"><div class="c">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">4,200<span>+</span></div><div class="stat-label">Assets under active maintenance contracts</div></div>
+    <div class="stat"><div class="stat-num">98.5<span>%</span></div><div class="stat-label">SLA achievement rate, rolling 12 months</div></div>
+    <div class="stat"><div class="stat-num">4hr</div><div class="stat-label">Emergency response time, 24/7/365</div></div>
+    <div class="stat"><div class="stat-num">180<span>+</span></div><div class="stat-label">Client sites across England and Wales</div></div>
+  </div>
+</div></div>
+
+<section class="std"><div class="c">
+  <div class="section-eyebrow">— What we do</div>
+  <h2 class="section-title">Maintenance, service, and compliance — covered.</h2>
+  <p class="section-lede">We keep your plant running and compliant. From planned preventive maintenance to 24-hour emergency breakdown, with full statutory inspection coverage and detailed reporting.</p>
+  <div class="sectors">
+    <div class="sector"><h3>Planned maintenance</h3><p>PPM contracts tailored to your equipment and production schedule. Reduce downtime, extend asset life.</p></div>
+    <div class="sector"><h3>Breakdown response</h3><p>24/7/365 emergency callout with 4-hour response SLA. Multi-skilled engineers, nationwide coverage.</p></div>
+    <div class="sector"><h3>Statutory inspections</h3><p>LOLER, PUWER, PSSR, LEV testing. Full compliance documentation and audit trails.</p></div>
+    <div class="sector"><h3>Equipment upgrades</h3><p>Retrofit, modernisation, and efficiency improvements. Controls upgrades, energy optimisation.</p></div>
+    <div class="sector"><h3>Calibration</h3><p>UKAS-traceable calibration of instruments, gauges, safety valves, and load cells.</p></div>
+    <div class="sector"><h3>Multi-site contracts</h3><p>Single point of contact for all your sites. Consistent service delivery, consolidated reporting.</p></div>
+  </div>
+</div></section>
+
+<section class="emergency"><div class="c">
+  <h2>Equipment down? Call us now.</h2>
+  <p>Our 24-hour control centre dispatches the nearest available engineer. Average response time: under 4 hours.</p>
+  <div class="emergency-phone">0800 555 999</div>
+</div></section>
+
+<section class="contact" id="contact"><div class="c">
+  <div class="contact-grid">
+    <div>
+      <div class="section-eyebrow">— Get in touch</div>
+      <h2 class="contact-title">Tell us what you need.</h2>
+      <p class="contact-body">Whether you're looking for a maintenance contract, need a one-off repair, or want a quote for statutory inspections — our team is ready.</p>
+      <div class="contact-row"><div class="contact-label">24/7</div><div class="contact-value"><strong>0800 555 999</strong><span>Emergency breakdown line</span></div></div>
+      <div class="contact-row"><div class="contact-label">Office</div><div class="contact-value"><strong>+44 (0) 161 555 400</strong><span>Mon–Fri, 8am–5pm</span></div></div>
+      <div class="contact-row"><div class="contact-label">Email</div><div class="contact-value"><strong>service@atlasindustrial.example</strong><span>Quotes, contracts, service</span></div></div>
+      <div class="contact-row"><div class="contact-label">Office</div><div class="contact-value"><strong>Trafford Park, Manchester, M17 1QS</strong><span>By appointment</span></div></div>
+      <div class="form-hint"><strong>Try the assistant.</strong> Click the chat button in the corner — it gathers the details our service team needs so we can respond faster.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--rule);padding:32px;border-radius:2px;">
+      <div class="section-eyebrow">— Service request</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:18px">Or use the form</h3>
+      <form onsubmit="event.preventDefault();alert('This is a demo site. Try the Forgio assistant in the bottom-right corner.')">
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:4px">Name</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:4px">Company</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px"/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:4px">Email</label><input type="email" style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:4px">How can we help?</label><textarea style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px;min-height:80px;resize:vertical" placeholder="Describe your service needs..."></textarea></div>
+        <button type="submit" style="width:100%;padding:11px;background:var(--dark);color:white;font-size:14px;font-weight:600;border:none;border-radius:2px;cursor:pointer">Submit request</button>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="c"><div class="footer-inner">
+  <div>© 2026 Atlas Industrial Services Ltd · Company No. 03198542 · VAT GB 512 7780 23</div>
+  <div>Demo site · powered by <a href="https://forgio.co.uk">Forgio</a></div>
+</div></div></footer>
+
+<script src="https://forgio.co.uk/widget.js"
+  data-api-url="https://forgio-backend-production.up.railway.app"
+  data-template="services"
+  data-demo="true"
+  data-tenant="atlas-industrial-demo"
+  data-launcher-text="Get help now"
+></script>
+</body>
+</html>
