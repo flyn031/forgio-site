@@ -188,9 +188,27 @@
   <section class="categories">
     <div class="container">
       <div class="cat-header">
-        <h2 class="cat-title">Four ways into <em>industrial engineering.</em></h2>
-        <p class="cat-sub">Every demo runs the real Forgio engine, configured for that category. Click one to try it on a realistic company website.</p>
+        <h2 class="cat-title">Find <em>your</em> industry.</h2>
+        <p class="cat-sub">Type what your business does. We'll show you the closest demo.</p>
       </div>
+
+      <!-- Search box -->
+      <div style="margin-bottom:2rem;">
+        <input id="industry-search" type="text" placeholder="e.g. &quot;we fabricate steel structures&quot; or &quot;cold room installation&quot;" style="
+          width:100%;
+          padding:14px 18px;
+          background:var(--bg-card);
+          border:1px solid var(--border-strong);
+          color:var(--fg);
+          font-family:var(--font-sans);
+          font-size:1rem;
+          border-radius:14px;
+          transition:border-color .2s;
+          outline:none;
+        " onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border-strong)'" />
+        <div id="search-result" style="margin-top:.75rem;font-size:.9rem;color:var(--fg-muted);min-height:1.5em;"></div>
+      </div>
+
       <div class="cat-grid" id="cat-grid"></div>
     </div>
   </section>
@@ -268,10 +286,89 @@ const CATEGORIES = [
   },
 ];
 
+// ====== KEYWORD MATCHING ======
+const KEYWORD_MAP = [
+  // Fabrication
+  { keywords: ['fabricat', 'steel', 'stainless', 'weld', 'metal', 'sheet metal', 'cnc', 'machin', 'laser cut', 'press', 'fold', 'galvan', 'powder coat', 'handrail', 'balustrad', 'staircase', 'platform', 'mezzanine', 'structural', 'frame', 'bracket', 'hopper', 'chute', 'tank', 'vessel', 'pressure', 'pipe', 'tube', 'aluminium', 'forge', 'cast'], cat: 'fabrication' },
+  // Equipment & Systems
+  { keywords: ['conveyor', 'packaging', 'automation', 'robot', 'material handling', 'belt', 'roller', 'chain', 'palletis', 'sorting', 'pick and place', 'assembly', 'production line', 'bottling', 'filling', 'wrapping', 'labelling', 'control panel', 'plc', 'scada', 'hmi', 'motor control', 'bespoke machine', 'special purpose'], cat: 'conveyors' },
+  // Installation
+  { keywords: ['refrigerat', 'hvac', 'air con', 'heat pump', 'cold store', 'cold room', 'freezer', 'chiller', 'cooling', 'ventilat', 'ductwork', 'f-gas', 'f gas', 'fgas', 'refcom', 'air condition', 'split system', 'vrf', 'vrv', 'dx', 'commercial kitchen', 'cellar cool', 'blast', 'temperat', 'install', 'commission', 'electrical install', 'fire alarm', 'fire protect', 'sprinkler', 'plumb', 'gas safe', 'boiler'], cat: 'refrigeration' },
+  // Services
+  { keywords: ['maintenance', 'service', 'repair', 'breakdown', 'callout', 'call-out', 'ppm', 'preventive', 'preventative', 'calibrat', 'inspect', 'loler', 'puwer', 'pssr', 'statutory', 'testing', 'ndt', 'plant', 'overhaul', 'refurbish', 'retrofit', 'upgrade', 'site service', 'shutdown', 'turnaround'], cat: 'services' },
+];
+
+function findBestMatch(input) {
+  const lower = input.toLowerCase();
+  let bestCat = null;
+  let bestScore = 0;
+
+  for (const group of KEYWORD_MAP) {
+    let score = 0;
+    for (const kw of group.keywords) {
+      if (lower.includes(kw)) score += kw.length; // Longer matches score higher
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestCat = group.cat;
+    }
+  }
+
+  return bestCat;
+}
+
+// Search handler
+const searchInput = document.getElementById('industry-search');
+const searchResult = document.getElementById('search-result');
+let searchTimeout;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  const val = searchInput.value.trim();
+
+  if (val.length < 3) {
+    searchResult.innerHTML = '';
+    // Show all cards
+    document.querySelectorAll('.cat-card').forEach(c => c.style.display = '');
+    return;
+  }
+
+  searchTimeout = setTimeout(() => {
+    const match = findBestMatch(val);
+    if (match) {
+      const cat = CATEGORIES.find(c => c.url.includes(match));
+      searchResult.innerHTML = `<span style="color:var(--accent);">Best match:</span> <strong>${cat?.name || match}</strong> — <a href="${cat?.url}" style="color:var(--accent);text-decoration:underline;">try this demo →</a>`;
+
+      // Highlight matching card, dim others
+      document.querySelectorAll('.cat-card').forEach(c => {
+        if (c.dataset.cat === match) {
+          c.style.opacity = '1';
+          c.style.transform = 'translateY(-2px)';
+          c.style.borderColor = 'rgba(255,107,53,0.3)';
+        } else {
+          c.style.opacity = '0.4';
+          c.style.transform = '';
+          c.style.borderColor = '';
+        }
+      });
+    } else {
+      searchResult.innerHTML = `No exact match — <a href="https://calendly.com/jimmyflyn031/30min" style="color:var(--accent);text-decoration:underline;">book a call</a> and we'll show you how Forgio works for your industry.`;
+      document.querySelectorAll('.cat-card').forEach(c => {
+        c.style.opacity = '1';
+        c.style.transform = '';
+        c.style.borderColor = '';
+      });
+    }
+  }, 300);
+});
+
 const grid = document.getElementById('cat-grid');
 for (const cat of CATEGORIES) {
   const card = document.createElement('div');
   card.className = 'cat-card';
+  const catId = cat.url.split('/').pop().replace('.html', '');
+  card.dataset.cat = catId;
+  card.style.transition = 'opacity .3s, transform .3s, border-color .3s';
   card.innerHTML = `
     <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
       <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
