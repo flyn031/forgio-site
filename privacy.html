@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Forgio</title>
+  <meta name="description" content="Forgio's privacy policy. How we collect, use, and protect your data." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A; --bg-soft: #141414; --bg-card: #161616;
+      --fg: #F5F1EB; --fg-muted: #8B857B; --fg-dim: #5A554E;
+      --accent: #FF6B35; --accent-soft: #FFB088; --accent-dim: #2A1810;
+      --border: #1F1F1F; --border-strong: #2A2A2A;
+      --font-display: 'Fraunces', 'Times New Roman', serif;
+      --font-sans: 'Geist', -apple-system, system-ui, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+      --content-width: 780px; --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(10,10,10,0.7); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1080px; margin: 0 auto; padding: 1.1rem var(--gutter); display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; letter-spacing: -0.02em; color: var(--fg); display: flex; align-items: baseline; }
+    .wordmark::before { content: ''; display: inline-block; width: 0.35em; height: 0.35em; background: var(--accent); border-radius: 50%; margin-right: 0.4em; box-shadow: 0 0 12px rgba(255,107,53,0.6); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.92rem; }
+    .nav-links a { color: var(--fg-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--fg); text-decoration: none; }
+    .nav-cta { padding: 0.55rem 1.1rem; background: var(--fg); color: var(--bg); font-weight: 500; font-size: 0.9rem; border-radius: 999px; transition: transform 0.2s, background 0.2s; }
+    .nav-cta:hover { background: var(--accent); transform: translateY(-1px); text-decoration: none; }
+    @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+    .container { max-width: var(--content-width); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+    .legal-header { padding: clamp(3rem, 6vw, 5rem) 0 2rem; }
+    .legal-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .legal-meta { font-size: 0.88rem; color: var(--fg-muted); font-family: var(--font-mono); }
+
+    .legal-body { padding-bottom: clamp(4rem, 8vw, 6rem); }
+    .legal-body h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 450; margin: 2.5rem 0 0.75rem; letter-spacing: -0.01em; color: var(--fg); }
+    .legal-body h3 { font-size: 1.05rem; font-weight: 600; margin: 1.75rem 0 0.5rem; color: var(--fg); }
+    .legal-body p { color: var(--fg-muted); margin-bottom: 1rem; line-height: 1.65; }
+    .legal-body ul, .legal-body ol { color: var(--fg-muted); margin: 0 0 1rem 1.5rem; line-height: 1.65; }
+    .legal-body li { margin-bottom: 0.4rem; }
+    .legal-body strong { color: var(--fg); font-weight: 500; }
+    .legal-body table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.92rem; }
+    .legal-body th { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-strong); color: var(--fg); font-weight: 500; font-size: 0.85rem; }
+    .legal-body td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--fg-muted); vertical-align: top; }
+
+    footer { padding: 3rem 0 2.5rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--fg-dim); }
+    .footer-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--gutter); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-mark { font-family: var(--font-display); font-size: 1.05rem; color: var(--fg-muted); display: flex; align-items: baseline; }
+    .footer-mark::before { content: ''; display: inline-block; width: 0.3em; height: 0.3em; background: var(--accent); border-radius: 50%; margin-right: 0.4em; }
+    .footer-links { display: flex; gap: 1.25rem; margin-top: 0.4rem; }
+    .footer-links a { color: var(--fg-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">forgio</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="https://calendly.com/jimmyflyn031/30min" class="nav-cta">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="legal-header">
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <div class="legal-meta">Last updated: 18 May 2026</div>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="container">
+
+      <h2>1. Who we are</h2>
+      <p>Forgio is operated by James O'Flynn, trading as Forgio, based in Leicestershire, England. We are the data controller for personal data collected through our website (forgio.co.uk), our AI chat widget, and related services.</p>
+      <p>Contact: <a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a></p>
+
+      <h2>2. What data we collect</h2>
+      <p>We collect the following categories of personal data:</p>
+
+      <h3>2.1 Data you provide directly</h3>
+      <ul>
+        <li><strong>Contact details</strong> — name, email address, phone number, company name, job title (provided during AI chat conversations or via contact forms)</li>
+        <li><strong>Project enquiry details</strong> — technical specifications, dimensions, timelines, drawings, and other project information shared during conversations with the Forgio AI</li>
+        <li><strong>Account information</strong> — email address and company name when signing up for notifications or booking a demo</li>
+      </ul>
+
+      <h3>2.2 Data collected automatically</h3>
+      <ul>
+        <li><strong>Usage data</strong> — pages visited, time spent, features used, conversation duration</li>
+        <li><strong>Device data</strong> — browser type, operating system, screen resolution, IP address</li>
+        <li><strong>Cookies</strong> — essential cookies only, used to maintain chat sessions (see Section 7)</li>
+      </ul>
+
+      <h3>2.3 Data collected on behalf of our customers</h3>
+      <p>When you interact with the Forgio widget on a customer's website, we process your conversation data on behalf of that customer (the data controller). Our customer determines how that data is used. We act as a data processor in this context.</p>
+
+      <h2>3. How we use your data</h2>
+      <table>
+        <thead>
+          <tr><th>Purpose</th><th>Lawful basis (UK GDPR)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Processing your enquiry through the AI chat and generating a structured RFQ</td><td>Legitimate interest (providing the service you've engaged with)</td></tr>
+          <tr><td>Delivering the RFQ to the business whose website you used</td><td>Legitimate interest (fulfilling the business's service)</td></tr>
+          <tr><td>Sending you a confirmation that your enquiry was received</td><td>Legitimate interest</td></tr>
+          <tr><td>Notifying you when a requested industry vertical goes live</td><td>Consent (you opted in via the "Notify me" form)</td></tr>
+          <tr><td>Responding to your direct enquiries to Forgio</td><td>Legitimate interest / pre-contractual steps</td></tr>
+          <tr><td>Improving our AI and services</td><td>Legitimate interest</td></tr>
+          <tr><td>Fraud prevention and security</td><td>Legitimate interest</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. AI processing</h2>
+      <p>Forgio uses artificial intelligence (powered by Anthropic's Claude API) to process your conversation and generate structured enquiry summaries. This means:</p>
+      <ul>
+        <li>Your conversation text is sent to Anthropic's servers for processing</li>
+        <li>Anthropic processes the data as our sub-processor and does not use your data to train their models</li>
+        <li>The AI generates a structured summary (RFQ) which is stored and emailed to the relevant business</li>
+        <li>No automated decisions with legal or significant effects are made solely by the AI</li>
+      </ul>
+
+      <h2>5. Who we share your data with</h2>
+      <ul>
+        <li><strong>The business whose website you used</strong> — they receive the structured RFQ containing your contact details and project specifications. They are a separate data controller for this data.</li>
+        <li><strong>Anthropic</strong> — processes conversation data to generate AI responses (sub-processor, US-based, with appropriate safeguards)</li>
+        <li><strong>Railway</strong> — hosts our backend infrastructure (sub-processor, EU region)</li>
+        <li><strong>Vercel</strong> — hosts our website (sub-processor)</li>
+        <li><strong>Resend</strong> — delivers RFQ emails (sub-processor)</li>
+        <li><strong>Zoho</strong> — email service provider (sub-processor, EU)</li>
+      </ul>
+      <p>We do not sell your personal data to anyone. We do not share your data with advertisers.</p>
+
+      <h2>6. International transfers</h2>
+      <p>Some of our sub-processors (Anthropic, Vercel) are based in the United States. Where personal data is transferred outside the UK, we ensure appropriate safeguards are in place, including Standard Contractual Clauses (SCCs) or adequacy decisions as applicable.</p>
+
+      <h2>7. Cookies</h2>
+      <p>We use only essential cookies required for the chat widget to function (maintaining your conversation session). We do not use advertising cookies, tracking pixels, or analytics cookies that identify individuals. No cookie consent banner is required for strictly necessary cookies under UK GDPR.</p>
+
+      <h2>8. How long we keep your data</h2>
+      <ul>
+        <li><strong>Conversation data and RFQs</strong> — retained for 12 months from the date of the enquiry, then deleted</li>
+        <li><strong>"Notify me" signups</strong> — retained until you unsubscribe or the relevant vertical launches, whichever is sooner</li>
+        <li><strong>Customer account data</strong> — retained for the duration of the customer relationship plus 6 years (legal/accounting requirements)</li>
+        <li><strong>Server logs</strong> — retained for 30 days</li>
+      </ul>
+
+      <h2>9. Your rights</h2>
+      <p>Under UK GDPR, you have the following rights:</p>
+      <ul>
+        <li><strong>Right of access</strong> — request a copy of the personal data we hold about you</li>
+        <li><strong>Right to rectification</strong> — request correction of inaccurate data</li>
+        <li><strong>Right to erasure</strong> — request deletion of your data (subject to legal obligations)</li>
+        <li><strong>Right to restrict processing</strong> — request we limit how we use your data</li>
+        <li><strong>Right to data portability</strong> — receive your data in a machine-readable format</li>
+        <li><strong>Right to object</strong> — object to processing based on legitimate interest</li>
+        <li><strong>Right to withdraw consent</strong> — where processing is based on consent</li>
+      </ul>
+      <p>To exercise any of these rights, email <a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a>. We will respond within 30 days.</p>
+
+      <h2>10. Data security</h2>
+      <p>We implement appropriate technical and organisational measures to protect your personal data, including:</p>
+      <ul>
+        <li>Encryption in transit (HTTPS/TLS on all connections)</li>
+        <li>Encrypted database storage</li>
+        <li>Access controls limiting who can view personal data</li>
+        <li>Regular security reviews</li>
+      </ul>
+
+      <h2>11. Children</h2>
+      <p>Forgio is a B2B service designed for business use. We do not knowingly collect personal data from anyone under the age of 16. If you believe a child has provided us with personal data, please contact us and we will delete it.</p>
+
+      <h2>12. Complaints</h2>
+      <p>If you are unhappy with how we handle your personal data, you have the right to lodge a complaint with the Information Commissioner's Office (ICO):</p>
+      <p>Website: <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a><br/>Phone: 0303 123 1113</p>
+
+      <h2>13. Changes to this policy</h2>
+      <p>We may update this policy from time to time. We will notify you of significant changes by posting a notice on our website. The "Last updated" date at the top of this page indicates when the policy was last revised.</p>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">forgio</div>
+      <div style="margin-top:0.6rem;max-width:32ch;">The AI pre-sales engineer for industrial businesses. Built in Leicestershire, England.</div>
+    </div>
+    <div style="text-align:right;line-height:1.6;">
+      <div>© 2026 Forgio · Leicestershire, England</div>
+      <div class="footer-links">
+        <a href="mailto:james@forgio.co.uk">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

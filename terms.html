@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Forgio</title>
+  <meta name="description" content="Forgio's terms of service. The rules and conditions for using our AI pre-sales service." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A; --bg-soft: #141414; --bg-card: #161616;
+      --fg: #F5F1EB; --fg-muted: #8B857B; --fg-dim: #5A554E;
+      --accent: #FF6B35; --accent-soft: #FFB088; --accent-dim: #2A1810;
+      --border: #1F1F1F; --border-strong: #2A2A2A;
+      --font-display: 'Fraunces', 'Times New Roman', serif;
+      --font-sans: 'Geist', -apple-system, system-ui, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+      --content-width: 780px; --gutter: clamp(1.25rem, 4vw, 2rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(10,10,10,0.7); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1080px; margin: 0 auto; padding: 1.1rem var(--gutter); display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; letter-spacing: -0.02em; color: var(--fg); display: flex; align-items: baseline; }
+    .wordmark::before { content: ''; display: inline-block; width: 0.35em; height: 0.35em; background: var(--accent); border-radius: 50%; margin-right: 0.4em; box-shadow: 0 0 12px rgba(255,107,53,0.6); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.92rem; }
+    .nav-links a { color: var(--fg-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--fg); text-decoration: none; }
+    .nav-cta { padding: 0.55rem 1.1rem; background: var(--fg); color: var(--bg); font-weight: 500; font-size: 0.9rem; border-radius: 999px; transition: transform 0.2s, background 0.2s; }
+    .nav-cta:hover { background: var(--accent); transform: translateY(-1px); text-decoration: none; }
+    @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+    .container { max-width: var(--content-width); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+    .legal-header { padding: clamp(3rem, 6vw, 5rem) 0 2rem; }
+    .legal-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .legal-meta { font-size: 0.88rem; color: var(--fg-muted); font-family: var(--font-mono); }
+
+    .legal-body { padding-bottom: clamp(4rem, 8vw, 6rem); }
+    .legal-body h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 450; margin: 2.5rem 0 0.75rem; letter-spacing: -0.01em; color: var(--fg); }
+    .legal-body h3 { font-size: 1.05rem; font-weight: 600; margin: 1.75rem 0 0.5rem; color: var(--fg); }
+    .legal-body p { color: var(--fg-muted); margin-bottom: 1rem; line-height: 1.65; }
+    .legal-body ul, .legal-body ol { color: var(--fg-muted); margin: 0 0 1rem 1.5rem; line-height: 1.65; }
+    .legal-body li { margin-bottom: 0.4rem; }
+    .legal-body strong { color: var(--fg); font-weight: 500; }
+
+    footer { padding: 3rem 0 2.5rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--fg-dim); }
+    .footer-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--gutter); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-mark { font-family: var(--font-display); font-size: 1.05rem; color: var(--fg-muted); display: flex; align-items: baseline; }
+    .footer-mark::before { content: ''; display: inline-block; width: 0.3em; height: 0.3em; background: var(--accent); border-radius: 50%; margin-right: 0.4em; }
+    .footer-links { display: flex; gap: 1.25rem; margin-top: 0.4rem; }
+    .footer-links a { color: var(--fg-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">forgio</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="https://calendly.com/jimmyflyn031/30min" class="nav-cta">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="legal-header">
+    <div class="container">
+      <h1>Terms of Service</h1>
+      <div class="legal-meta">Last updated: 18 May 2026</div>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="container">
+
+      <h2>1. Introduction</h2>
+      <p>These terms of service ("Terms") govern your use of the Forgio website, AI chat widget, and related services ("Service") operated by James O'Flynn trading as Forgio ("we", "us", "our"), based in Leicestershire, England.</p>
+      <p>By using our Service — whether through our website, demos, or the Forgio widget embedded on a third-party website — you agree to these Terms. If you do not agree, please do not use the Service.</p>
+
+      <h2>2. The Service</h2>
+      <p>Forgio provides an AI-powered pre-sales qualification tool for industrial businesses. The Service includes:</p>
+      <ul>
+        <li>An AI chat widget that can be embedded on business websites</li>
+        <li>AI-driven conversation to qualify customer enquiries and gather technical specifications</li>
+        <li>Generation of structured Requests for Quotation (RFQs)</li>
+        <li>Email delivery of RFQs to the business's sales team</li>
+        <li>A demo environment for prospective customers to evaluate the Service</li>
+      </ul>
+
+      <h2>3. Demo usage</h2>
+      <p>Our public demos at forgio.co.uk/demos are provided free of charge for evaluation purposes. Demo conversations are subject to the following limits:</p>
+      <ul>
+        <li>Maximum 3 conversations per hour per user</li>
+        <li>Maximum 15 messages per conversation</li>
+        <li>File uploads are disabled in demo mode</li>
+        <li>Demo conversations may be used to improve the Service (anonymised)</li>
+      </ul>
+      <p>We reserve the right to suspend or limit demo access at any time without notice.</p>
+
+      <h2>4. Paid subscriptions</h2>
+
+      <h3>4.1 Plans and billing</h3>
+      <p>Paid subscriptions are billed monthly. Prices are listed on our pricing page and are exclusive of VAT unless stated otherwise. We may change our prices with 30 days' notice.</p>
+
+      <h3>4.2 Free trial</h3>
+      <p>We may offer a free trial period. At the end of the trial, your subscription will begin and you will be billed unless you cancel before the trial ends.</p>
+
+      <h3>4.3 Cancellation</h3>
+      <p>You may cancel your subscription at any time. Cancellation takes effect at the end of the current billing period. No refunds are provided for partial months. To cancel, email <a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a>.</p>
+
+      <h2>5. Customer responsibilities</h2>
+      <p>If you are a paying customer embedding the Forgio widget on your website, you agree to:</p>
+      <ul>
+        <li>Inform your website visitors that an AI chat service is in use, through your own privacy policy</li>
+        <li>Ensure you have a lawful basis to process enquiry data collected through the widget</li>
+        <li>Not use the Service for any unlawful purpose or to collect sensitive personal data (health, political opinions, biometric data, etc.) unless you have appropriate legal grounds</li>
+        <li>Not reverse-engineer, decompile, or attempt to extract the source code of the widget</li>
+        <li>Not resell, sublicense, or white-label the Service without our written consent</li>
+      </ul>
+
+      <h2>6. Data processing</h2>
+      <p>When you use Forgio as a paying customer, we act as a data processor on your behalf. We process personal data (enquiry details, contact information) only as necessary to provide the Service. See our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+      <p>On request, we will enter into a Data Processing Agreement (DPA) compliant with UK GDPR Article 28.</p>
+
+      <h2>7. AI disclaimers</h2>
+      <ul>
+        <li>The Forgio AI is designed to assist with enquiry qualification, not to provide engineering advice, quotes, or contractual commitments</li>
+        <li>AI-generated RFQs are summaries for human review — they should not be treated as binding specifications</li>
+        <li>While we strive for accuracy, the AI may occasionally misinterpret information or make errors. Human review of all RFQs is expected</li>
+        <li>The AI does not make pricing decisions, accept orders, or enter into contracts on behalf of any party</li>
+      </ul>
+
+      <h2>8. Intellectual property</h2>
+      <p>The Forgio name, logo, website design, widget code, and AI system prompts are our intellectual property. You may not copy, modify, or distribute them without our written permission.</p>
+      <p>The content of your conversations and RFQs belongs to you (or your customer, as applicable). We claim no ownership over your data.</p>
+
+      <h2>9. Availability and support</h2>
+      <p>We aim to keep the Service available 24/7 but do not guarantee uninterrupted access. We may perform maintenance, updates, or experience outages. We will endeavour to give advance notice of planned downtime.</p>
+      <p>Support is provided via email at <a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a>. Response times depend on your plan.</p>
+
+      <h2>10. Limitation of liability</h2>
+      <p>To the maximum extent permitted by law:</p>
+      <ul>
+        <li>The Service is provided "as is" without warranties of any kind, express or implied</li>
+        <li>We do not warrant that the AI will be error-free, accurate, or suitable for any particular purpose</li>
+        <li>Our total liability to you for any claim arising from the Service shall not exceed the fees you have paid us in the 12 months preceding the claim</li>
+        <li>We are not liable for indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities</li>
+        <li>We are not liable for any decisions made based on AI-generated content</li>
+      </ul>
+      <p>Nothing in these Terms excludes or limits liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, or any other liability that cannot be excluded by law.</p>
+
+      <h2>11. Indemnification</h2>
+      <p>You agree to indemnify and hold us harmless from any claims, losses, or damages arising from your use of the Service, your breach of these Terms, or your violation of any third party's rights.</p>
+
+      <h2>12. Termination</h2>
+      <p>We may suspend or terminate your access to the Service immediately if:</p>
+      <ul>
+        <li>You breach these Terms</li>
+        <li>You use the Service in a way that could harm us, other users, or third parties</li>
+        <li>Your payment fails and is not resolved within 14 days</li>
+      </ul>
+      <p>On termination, we will provide you with a copy of your data on request, and delete it within 30 days unless legally required to retain it.</p>
+
+      <h2>13. Changes to these terms</h2>
+      <p>We may update these Terms from time to time. We will notify you of material changes by email or by posting a notice on our website. Continued use of the Service after changes take effect constitutes acceptance of the revised Terms.</p>
+
+      <h2>14. Governing law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of England and Wales. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+      <h2>15. Contact</h2>
+      <p>If you have any questions about these Terms, please contact us:</p>
+      <p>James O'Flynn<br/>Forgio · Leicestershire, England<br/><a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a><br/><a href="https://forgio.co.uk">forgio.co.uk</a></p>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">forgio</div>
+      <div style="margin-top:0.6rem;max-width:32ch;">The AI pre-sales engineer for industrial businesses. Built in Leicestershire, England.</div>
+    </div>
+    <div style="text-align:right;line-height:1.6;">
+      <div>© 2026 Forgio · Leicestershire, England</div>
+      <div class="footer-links">
+        <a href="mailto:james@forgio.co.uk">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
