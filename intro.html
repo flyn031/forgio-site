@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgio — AI pre-sales for industrial businesses</title>
+  <meta name="description" content="Replace your contact form with an AI that qualifies enquiries and delivers structured, quote-ready RFQs to your sales team." />
+
+  <meta property="og:title" content="Forgio — Your enquiries, quote-ready in minutes" />
+  <meta property="og:description" content="AI pre-sales engineer for industrial businesses. Try a live demo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://forgio.co.uk/intro" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0A0A0A;--bg-soft:#141414;--bg-card:#161616;--fg:#F5F1EB;--fg-muted:#8B857B;--fg-dim:#5A554E;--accent:#FF6B35;--accent-soft:#FFB088;--accent-dim:#2A1810;--border:#1F1F1F;--border-strong:#2A2A2A;--font-display:'Fraunces','Times New Roman',serif;--font-sans:'Geist',-apple-system,system-ui,sans-serif;--font-mono:'Geist Mono','SF Mono',Menlo,monospace}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    ::selection{background:var(--accent);color:var(--bg)}
+    .wrap{max-width:640px;margin:0 auto;padding:clamp(3rem,8vw,5rem) clamp(1.25rem,4vw,2rem)}
+
+    .logo{font-family:var(--font-display);font-size:1.3rem;font-weight:500;letter-spacing:-.02em;display:flex;align-items:baseline;margin-bottom:3rem}
+    .logo::before{content:'';display:inline-block;width:.35em;height:.35em;background:var(--accent);border-radius:50%;margin-right:.4em;box-shadow:0 0 12px rgba(255,107,53,.6)}
+
+    h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);line-height:1.05;letter-spacing:-.03em;font-weight:380;font-variation-settings:'opsz' 144,'SOFT' 30;margin-bottom:1.5rem}
+    h1 em{font-style:italic;font-weight:320;color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100}
+
+    .lead{font-size:clamp(1.05rem,1.5vw,1.15rem);color:var(--fg-muted);line-height:1.6;margin-bottom:2.5rem}
+
+    .divider{height:1px;background:var(--border);margin:2.5rem 0}
+
+    h2{font-family:var(--font-display);font-size:1.5rem;font-weight:420;letter-spacing:-.015em;margin-bottom:1rem;font-variation-settings:'opsz' 60}
+
+    .steps{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:2.5rem}
+    .step{display:flex;gap:1rem;align-items:flex-start}
+    .step-num{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);background:var(--accent-dim);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+    .step-text{font-size:.95rem;color:var(--fg-muted);line-height:1.55}
+    .step-text strong{color:var(--fg);font-weight:500}
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0 2.5rem}
+    @media(max-width:500px){.stats{grid-template-columns:1fr}}
+    .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1rem;text-align:center}
+    .stat-num{font-family:var(--font-display);font-size:2rem;font-weight:360;line-height:1;margin-bottom:.4rem;font-variation-settings:'opsz' 144,'SOFT' 50}
+    .stat-num em{font-style:italic;color:var(--accent);font-variation-settings:'opsz' 144,'SOFT' 100}
+    .stat-label{font-size:.82rem;color:var(--fg-muted)}
+
+    .quote-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin:2rem 0 2.5rem}
+    .quote-label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+    .quote-text{font-family:var(--font-display);font-size:1.15rem;line-height:1.45;font-style:italic;font-weight:360;color:var(--fg);font-variation-settings:'opsz' 60}
+    .quote-text em{color:var(--accent);font-variation-settings:'opsz' 60,'SOFT' 100}
+
+    .industries{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 2rem}
+    .ind-tag{font-size:.8rem;padding:.35rem .75rem;border-radius:999px;border:1px solid var(--border-strong);color:var(--fg-muted)}
+
+    .cta-section{background:var(--bg-soft);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin:2.5rem 0 1.5rem}
+    .cta-section h2{margin-bottom:.75rem}
+    .cta-section p{color:var(--fg-muted);font-size:.95rem;margin-bottom:1.5rem;max-width:40ch;margin-left:auto;margin-right:auto}
+    .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;font-size:.95rem;font-weight:500;border-radius:999px;transition:transform .2s,background .2s;white-space:nowrap}
+    .btn-primary{background:var(--fg);color:var(--bg)}
+    .btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
+    .btn-ghost{background:transparent;color:var(--fg-muted);border:1px solid var(--border-strong)}
+    .btn-ghost:hover{color:var(--fg);border-color:var(--fg-muted)}
+
+    .footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.85rem;color:var(--fg-dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer a{color:var(--fg-muted);transition:color .2s}
+    .footer a:hover{color:var(--fg)}
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="logo">forgio</div>
+
+  <h1>Your enquiries, <em>quote-ready</em> in minutes.</h1>
+
+  <p class="lead">
+    Forgio is an AI pre-sales engineer that lives on your website. When a customer starts an enquiry, it asks the right technical questions — dimensions, materials, environment, compliance, timeline — and delivers a structured brief to your sales team. No more chasing specs. No more vague emails.
+  </p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">4-6<em>hrs</em></div>
+      <div class="stat-label">Saved per enquiry</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5<em>min</em></div>
+      <div class="stat-label">To set up on your site</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">£199</div>
+      <div class="stat-label">Per month, no contract</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>How it works</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>We add one script tag to your website.</strong> Works on WordPress, Wix, Squarespace, Shopify, or any custom site. No software to install, no training required.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>A customer starts an enquiry on your site.</strong> Instead of a contact form, they have a conversation with the AI. It asks the exact questions your engineers would ask — adapted for your industry.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Your sales team receives a structured RFQ.</strong> Specs, contact details, drawings, timeline, compliance requirements — all captured, scored, and emailed to your inbox. Ready to quote.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>Built for your industry</h2>
+
+  <p style="color:var(--fg-muted);font-size:.95rem;margin-bottom:1rem;">Forgio isn't a generic chatbot. It's built with industry-specific question flows for:</p>
+
+  <div class="industries">
+    <span class="ind-tag">Conveyor systems</span>
+    <span class="ind-tag">Refrigeration & HVAC</span>
+    <span class="ind-tag">Steel fabrication</span>
+    <span class="ind-tag">Process equipment</span>
+    <span class="ind-tag">Industrial controls</span>
+    <span class="ind-tag">Bespoke machinery</span>
+    <span class="ind-tag">Building services</span>
+    <span class="ind-tag">Plant maintenance</span>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-label">Why now?</div>
+    <div class="quote-text">The industrial sector is about 18 months behind on AI adoption. The businesses that start now — even with something as simple as enquiry qualification — will be <em>miles ahead</em> when their competitors start scrambling. This is the lowest-risk first step.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-section">
+    <h2>See it in action</h2>
+    <p>Try a live demo yourself, or book a 20-minute call and I'll show you what Forgio would make of your real enquiries.</p>
+    <div class="cta-row">
+      <a href="https://calendly.com/jimmyflyn031/30min" class="btn btn-primary">Book a demo call</a>
+      <a href="https://forgio.co.uk/demos.html" class="btn btn-ghost">Try it yourself →</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <span style="color:var(--fg-muted)">James O'Flynn</span> · Forgio · Leicestershire, England<br/>
+      <a href="mailto:james@forgio.co.uk">james@forgio.co.uk</a> · <a href="https://forgio.co.uk">forgio.co.uk</a>
+    </div>
+    <div>
+      <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
