@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install Forgio — 5 minutes on any website</title>
+  <meta name="description" content="Add Forgio to your website in 5 minutes. Works on WordPress, Wix, Squarespace, Shopify, and any custom site." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230A0A0A%22/><circle cx=%228%22 cy=%2210%22 r=%222%22 fill=%22%23FF6B35%22/><path d=%22M12 8 L24 8 M12 15 L20 15 M12 22 L18 22%22 stroke=%22%23F5F1EB%22 stroke-width=%222%22 stroke-linecap=%22round%22/></svg>">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0A0A0A;--bg-soft:#141414;--bg-card:#161616;--fg:#F5F1EB;--fg-muted:#8B857B;--fg-dim:#5A554E;--accent:#FF6B35;--accent-soft:#FFB088;--accent-dim:#2A1810;--border:#1F1F1F;--border-strong:#2A2A2A;--font-display:'Fraunces','Times New Roman',serif;--font-sans:'Geist',-apple-system,system-ui,sans-serif;--font-mono:'Geist Mono','SF Mono',Menlo,monospace;--content-width:780px;--gutter:clamp(1.25rem,4vw,2rem)}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    ::selection{background:var(--accent);color:var(--bg)}
+
+    nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(10,10,10,.7);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1080px;margin:0 auto;padding:1.1rem var(--gutter);display:flex;align-items:center;justify-content:space-between}
+    .wordmark{font-family:var(--font-display);font-size:1.4rem;font-weight:500;letter-spacing:-.02em;color:var(--fg);display:flex;align-items:baseline;text-decoration:none}
+    .wordmark::before{content:'';display:inline-block;width:.35em;height:.35em;background:var(--accent);border-radius:50%;margin-right:.4em;box-shadow:0 0 12px rgba(255,107,53,.6)}
+    .nav-links{display:flex;align-items:center;gap:2rem;font-size:.92rem}
+    .nav-links a{color:var(--fg-muted);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--fg);text-decoration:none}
+    .nav-cta{padding:.55rem 1.1rem;background:var(--fg);color:var(--bg);font-weight:500;font-size:.9rem;border-radius:999px;transition:transform .2s,background .2s}
+    .nav-cta:hover{background:var(--accent);transform:translateY(-1px);text-decoration:none}
+    @media(max-width:720px){.nav-links a:not(.nav-cta){display:none}}
+
+    .container{max-width:var(--content-width);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+    .page-header{padding:clamp(3rem,6vw,5rem) 0 2rem}
+    .page-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:400;letter-spacing:-.02em;margin-bottom:.75rem;font-variation-settings:'opsz' 144,'SOFT' 30}
+    .page-header h1 em{font-style:italic;color:var(--accent);font-weight:360;font-variation-settings:'opsz' 144,'SOFT' 100}
+    .page-header p{font-size:1.05rem;color:var(--fg-muted);max-width:50ch;line-height:1.55}
+
+    .section{margin-bottom:3rem}
+    .section h2{font-family:var(--font-display);font-size:1.5rem;font-weight:450;letter-spacing:-.01em;margin-bottom:1rem}
+
+    .code-block{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin:1rem 0 1.5rem;overflow-x:auto;position:relative}
+    .code-block code{font-family:var(--font-mono);font-size:.85rem;color:var(--accent-soft);line-height:1.7;white-space:pre;display:block}
+    .code-block .comment{color:var(--fg-dim)}
+    .code-block .attr{color:var(--fg-muted)}
+    .code-block .val{color:var(--accent)}
+    .copy-btn{position:absolute;top:10px;right:10px;background:var(--border-strong);color:var(--fg-muted);border:none;padding:5px 10px;border-radius:6px;font-size:.75rem;font-family:var(--font-mono);cursor:pointer;transition:background .2s,color .2s}
+    .copy-btn:hover{background:var(--accent);color:var(--bg)}
+
+    .platform-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0}
+    @media(max-width:600px){.platform-grid{grid-template-columns:1fr}}
+
+    .platform-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:border-color .2s,transform .2s;cursor:pointer}
+    .platform-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+    .platform-card.open{border-color:var(--accent-dim)}
+    .platform-name{font-family:var(--font-display);font-size:1.15rem;font-weight:450;margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem}
+    .platform-time{font-size:.82rem;color:var(--fg-dim);font-family:var(--font-mono)}
+    .platform-steps{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);display:none;font-size:.92rem;color:var(--fg-muted);line-height:1.65}
+    .platform-card.open .platform-steps{display:block}
+    .platform-steps ol{margin:0 0 0 1.25rem}
+    .platform-steps li{margin-bottom:.5rem}
+    .platform-steps strong{color:var(--fg);font-weight:500}
+    .platform-steps .path{font-family:var(--font-mono);font-size:.85rem;color:var(--accent-soft);background:var(--bg);padding:2px 6px;border-radius:4px}
+
+    .config-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.9rem}
+    .config-table th{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--border-strong);color:var(--fg);font-weight:500;font-size:.82rem;font-family:var(--font-mono);letter-spacing:.03em}
+    .config-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--fg-muted);vertical-align:top}
+    .config-table td:first-child{font-family:var(--font-mono);font-size:.85rem;color:var(--accent-soft);white-space:nowrap}
+
+    .help-box{background:var(--bg-soft);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin:2rem 0;text-align:center}
+    .help-box h3{font-family:var(--font-display);font-size:1.2rem;font-weight:420;margin-bottom:.5rem}
+    .help-box p{color:var(--fg-muted);font-size:.95rem;margin-bottom:1rem}
+    .help-box a.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.2rem;background:var(--fg);color:var(--bg);font-weight:500;font-size:.9rem;border-radius:999px;transition:background .2s,transform .2s;text-decoration:none}
+    .help-box a.btn:hover{background:var(--accent);transform:translateY(-1px)}
+
+    footer{padding:3rem 0 2.5rem;border-top:1px solid var(--border);font-size:.88rem;color:var(--fg-dim)}
+    .footer-inner{max-width:1080px;margin:0 auto;padding:0 var(--gutter);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+    .footer-mark{font-family:var(--font-display);font-size:1.05rem;color:var(--fg-muted);display:flex;align-items:baseline}
+    .footer-mark::before{content:'';display:inline-block;width:.3em;height:.3em;background:var(--accent);border-radius:50%;margin-right:.4em}
+    .footer-links{display:flex;gap:1.25rem;margin-top:.4rem}
+    .footer-links a{color:var(--fg-muted);text-decoration:none}
+    .footer-links a:hover{color:var(--fg)}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">forgio</a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="https://calendly.com/jimmyflyn031/30min" class="nav-cta">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-header">
+    <div class="container">
+      <h1>Install Forgio in <em>5 minutes.</em></h1>
+      <p>One script tag. Any website. Your AI pre-sales engineer goes live the moment you paste it.</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- The code -->
+    <div class="section">
+      <h2>The script tag</h2>
+      <p style="color:var(--fg-muted);font-size:.95rem;margin-bottom:1rem;">Copy this and paste it into your website's header or before the closing &lt;/body&gt; tag. We'll customise the values for your business during onboarding.</p>
+
+      <div class="code-block" id="code-block">
+        <button class="copy-btn" onclick="copyCode()">Copy</button>
+        <code><span class="comment">&lt;!-- Forgio AI Pre-Sales Widget --&gt;</span>
+&lt;script
+  src="https://forgio.co.uk/widget.js"
+  <span class="attr">data-api-url</span>=<span class="val">"https://forgio-backend-production.up.railway.app"</span>
+  <span class="attr">data-tenant</span>=<span class="val">"your-company"</span>
+  <span class="attr">data-template</span>=<span class="val">"your-industry"</span>
+  <span class="attr">data-allow-uploads</span>=<span class="val">"true"</span>
+  <span class="attr">data-launcher-text</span>=<span class="val">"Start your enquiry"</span>
+  <span class="attr">data-color</span>=<span class="val">"#FF6B35"</span>
+&gt;&lt;/script&gt;</code>
+      </div>
+
+      <table class="config-table">
+        <thead>
+          <tr><th>Attribute</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>data-tenant</td><td>Your unique company ID — we set this up for you</td></tr>
+          <tr><td>data-template</td><td>Your industry template (conveyors, refrigeration, fabrication, etc.)</td></tr>
+          <tr><td>data-allow-uploads</td><td>Enable file and drawing uploads (true/false)</td></tr>
+          <tr><td>data-launcher-text</td><td>The text on the chat button — customise to match your site</td></tr>
+          <tr><td>data-color</td><td>Accent colour — use your brand hex code</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Platform guides -->
+    <div class="section">
+      <h2>Platform guides</h2>
+      <p style="color:var(--fg-muted);font-size:.95rem;margin-bottom:.5rem;">Click your platform for step-by-step instructions.</p>
+
+      <div class="platform-grid">
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">WordPress</div>
+          <div class="platform-time">2 minutes</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Install the free <strong>"Insert Headers and Footers"</strong> plugin (or "WPCode")</li>
+              <li>Go to <span class="path">Settings → Insert Headers and Footers</span></li>
+              <li>Paste the Forgio script tag into the <strong>"Scripts in Header"</strong> box</li>
+              <li>Click <strong>Save</strong></li>
+              <li>Refresh your site — the chat button appears in the bottom-right corner</li>
+            </ol>
+            <p style="margin-top:.75rem;">Alternatively: <span class="path">Appearance → Theme Editor → header.php</span> — paste before <span class="path">&lt;/head&gt;</span></p>
+          </div>
+        </div>
+
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">Wix</div>
+          <div class="platform-time">2 minutes</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Go to <span class="path">Settings → Custom Code</span></li>
+              <li>Click <strong>"Add Custom Code"</strong></li>
+              <li>Paste the Forgio script tag</li>
+              <li>Set placement to <strong>"All pages"</strong> and <strong>"Head"</strong></li>
+              <li>Click <strong>Apply</strong></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">Squarespace</div>
+          <div class="platform-time">2 minutes</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Go to <span class="path">Settings → Advanced → Code Injection</span></li>
+              <li>Paste the Forgio script tag into the <strong>"Header"</strong> box</li>
+              <li>Click <strong>Save</strong></li>
+              <li>Refresh your site to confirm</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">Shopify</div>
+          <div class="platform-time">3 minutes</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Go to <span class="path">Online Store → Themes</span></li>
+              <li>Click <strong>"Edit Code"</strong> on your active theme</li>
+              <li>Open <span class="path">theme.liquid</span></li>
+              <li>Paste the Forgio script tag just before <span class="path">&lt;/head&gt;</span></li>
+              <li>Click <strong>Save</strong></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">Custom HTML / Other</div>
+          <div class="platform-time">1 minute</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Open your site's main HTML file (usually <span class="path">index.html</span>)</li>
+              <li>Paste the Forgio script tag just before the closing <span class="path">&lt;/body&gt;</span> tag</li>
+              <li>Save and deploy</li>
+            </ol>
+            <p style="margin-top:.75rem;">Works with any static site, Next.js, Gatsby, Hugo, Jekyll, or any framework that outputs HTML.</p>
+          </div>
+        </div>
+
+        <div class="platform-card" onclick="togglePlatform(this)">
+          <div class="platform-name">Google Tag Manager</div>
+          <div class="platform-time">3 minutes</div>
+          <div class="platform-steps">
+            <ol>
+              <li>Create a new <strong>Custom HTML</strong> tag</li>
+              <li>Paste the Forgio script tag</li>
+              <li>Set trigger to <strong>"All Pages"</strong></li>
+              <li>Click <strong>Save</strong>, then <strong>Submit</strong> and <strong>Publish</strong></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What happens next -->
+    <div class="section">
+      <h2>What happens after install</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1rem;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--accent);min-width:24px;">01</div>
+          <div style="color:var(--fg-muted);font-size:.95rem;"><strong style="color:var(--fg)">Chat button appears</strong> — a floating button in the bottom-right corner of every page. Branded to your colours.</div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--accent);min-width:24px;">02</div>
+          <div style="color:var(--fg-muted);font-size:.95rem;"><strong style="color:var(--fg)">Customer starts an enquiry</strong> — the AI greets them and begins asking industry-specific questions, gathering specs, and qualifying the project.</div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--accent);min-width:24px;">03</div>
+          <div style="color:var(--fg-muted);font-size:.95rem;"><strong style="color:var(--fg)">RFQ arrives in your inbox</strong> — a structured brief with specs, contact details, lead score, and any missing information flagged. Ready to quote.</div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--accent);min-width:24px;">04</div>
+          <div style="color:var(--fg-muted);font-size:.95rem;"><strong style="color:var(--fg)">To remove</strong> — delete the script tag from your site. Forgio stops immediately. No residual code, no data left behind.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help -->
+    <div class="help-box">
+      <h3>Need a hand installing?</h3>
+      <p>Book a 20-minute call and I'll walk you through it live. Most customers are up and running before the call ends.</p>
+      <a href="https://calendly.com/jimmyflyn031/30min" class="btn">Book install call</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">forgio</div>
+      <div style="margin-top:.6rem;max-width:36ch;">The AI pre-sales engineer for industrial businesses. Built in Leicestershire, England.</div>
+    </div>
+    <div style="text-align:right;line-height:1.6;">
+      <div>© 2026 Forgio · Leicestershire, England</div>
+      <div class="footer-links">
+        <a href="mailto:james@forgio.co.uk">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function togglePlatform(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.platform-card').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+function copyCode() {
+  const code = `<script\n  src="https://forgio.co.uk/widget.js"\n  data-api-url="https://forgio-backend-production.up.railway.app"\n  data-tenant="your-company"\n  data-template="your-industry"\n  data-allow-uploads="true"\n  data-launcher-text="Start your enquiry"\n  data-color="#FF6B35"\n><\/script>`;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
