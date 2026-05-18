@@ -835,6 +835,13 @@
   }
 
   function close() {
+    if (state.phase === "success" || state.phase === "error") {
+      state.phase = "welcome";
+      state.messages = [];
+      state.pendingFiles = [];
+      state.streaming = false;
+      state.finalRfq = null;
+    }
     state.open = false;
     render();
   }
