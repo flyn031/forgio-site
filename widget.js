@@ -140,7 +140,30 @@
       animation: slide-up 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
       z-index: 2;
       border: 1px solid #1F1F1F;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
     }
+    .panel.fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      bottom: 0 !important;
+      right: 0 !important;
+      left: 0 !important;
+      top: 0 !important;
+      border-radius: 0 !important;
+    }
+    .expand-btn {
+      background: none;
+      border: none;
+      color: #8B857B;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .expand-btn:hover { color: #F5F1EB; }
     @keyframes slide-up {
       from { opacity: 0; transform: translateY(20px) scale(0.96); }
       to { opacity: 1; transform: translateY(0) scale(1); }
@@ -649,6 +672,11 @@
             <span class="brand-dot"></span>
             <span>forgio</span>
           </div>
+          <button class="expand-btn" id="expand" aria-label="Toggle fullscreen">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 6V2H6M10 2H14V6M14 10V14H10M6 14H2V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
           <button class="close-btn" id="close" aria-label="Close">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -787,6 +815,16 @@
     }
     shadow.innerHTML = styleEl + panelShell();
     shadow.getElementById('close').addEventListener('click', close);
+    shadow.getElementById('expand').addEventListener('click', () => {
+      const panel = shadow.getElementById('panel');
+      panel.classList.toggle('fullscreen');
+      const btn = shadow.getElementById('expand');
+      if (panel.classList.contains('fullscreen')) {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 2L6 6H2M10 6H14V2M14 14H10V10M2 10V14H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      } else {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2H6M10 2H14V6M14 10V14H10M6 14H2V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+    });
 
     // Prevent scroll propagation to host page when scrolling over the widget
     const panelEl = shadow.getElementById('panel');
