@@ -569,5 +569,22 @@
     })();
   </script>
 
+<script>
+(function(){
+  var API="https://forgio-backend-production.up.railway.app/api/analytics/event";
+  function send(event,extra){
+    try{
+      var data={event:event,page:location.pathname,referrer:document.referrer};
+      if(extra)Object.assign(data,extra);
+      navigator.sendBeacon?navigator.sendBeacon(API,new Blob([JSON.stringify(data)],{type:"application/json"})):fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data),keepalive:true});
+    }catch(e){}
+  }
+  send("page_view");
+  document.addEventListener("click",function(e){
+    var link=e.target.closest('a[href*="calendly"],a[href*="demos/"],.btn-primary');
+    if(link)send("cta_click",{metadata:{href:link.href,text:link.textContent.trim().slice(0,50)}});
+  });
+})();
+</script>
 </body>
 </html>
