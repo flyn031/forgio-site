@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Meridian Electrical Services — Industrial electrical installation, Leeds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%224%22 fill=%22%231a1f2e%22/><text x=%2216%22 y=%2223%22 font-family=%22serif%22 font-size=%2220%22 font-weight=%22700%22 fill=%22%23f5c518%22 text-anchor=%22middle%22>M</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1a1f2e;--yellow:#f5c518;--yellow-light:#fad84a;--cream:#fafaf8;--warm:#f4f3ee;--text:#1a1a1a;--muted:#666;--rule:#ddd;--max:1140px;--g:clamp(1.25rem,4vw,2.5rem)}
+body{background:var(--cream);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.c{max-width:var(--max);margin:0 auto;padding-left:var(--g);padding-right:var(--g)}
+
+/* Demo banner */
+.demo-banner{background:#2a1f00;color:#fef3c7;text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.03em;line-height:1.5}
+.demo-banner strong{color:var(--yellow)}
+.demo-banner a{color:var(--yellow);text-decoration:underline}
+
+/* Top bar */
+.topbar{background:#111827;color:rgba(255,255,255,.75);font-size:13px;padding:8px 0}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center}
+.topbar a{color:rgba(255,255,255,.75)}
+.cert-badges{display:flex;gap:14px;align-items:center;font-size:11px;letter-spacing:.06em;font-weight:600;color:var(--yellow)}
+
+/* Nav */
+nav{background:var(--navy);border-bottom:3px solid var(--yellow)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:2rem}
+.logo{display:flex;align-items:center;gap:12px;color:white}
+.logo-bolt{font-size:28px;line-height:1}
+.logo-text-wrap{}
+.logo-name{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;letter-spacing:.01em;display:block}
+.logo-sub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);display:block;margin-top:1px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
+.nav-links a{color:rgba(255,255,255,.8);padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s}
+.nav-links a:hover,.nav-links a.active{color:white;border-bottom-color:var(--yellow)}
+.nav-cta{background:var(--yellow);color:var(--navy);padding:9px 18px;font-size:13px;font-weight:700;letter-spacing:.02em;border-radius:2px}
+.nav-cta:hover{background:var(--yellow-light)}
+@media(max-width:780px){.nav-links{display:none}}
+
+/* Hero */
+.hero{background:var(--navy);color:white;padding:60px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,transparent 40%,rgba(245,197,24,.04));pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}
+@media(max-width:780px){.hero-inner{grid-template-columns:1fr}}
+.hero-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:14px;font-weight:600}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,4.5vw,3.1rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero-sub{font-size:15px;line-height:1.65;color:rgba(255,255,255,.72);max-width:52ch;margin-bottom:2.25rem}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:14px;font-weight:600;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:transform .15s,background .15s}
+.btn-yellow{background:var(--yellow);color:var(--navy)}
+.btn-yellow:hover{background:var(--yellow-light);transform:translateY(-1px)}
+.btn-ghost{color:white;border-color:rgba(255,255,255,.3)}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Hero diagram */
+.hero-fig{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:2rem}
+.elec-diagram{width:100%;aspect-ratio:1.2}
+
+/* Stats bar */
+.stats{background:var(--navy);border-top:1px solid rgba(255,255,255,.1);padding:0}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08)}
+@media(max-width:700px){.stats-inner{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:24px 20px;border-right:1px solid rgba(255,255,255,.08);color:white}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'DM Serif Display',serif;font-size:28px;line-height:1;margin-bottom:4px}
+.stat-num em{font-style:normal;color:var(--yellow)}
+.stat-label{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.02em}
+
+/* Services */
+section.std{padding:72px 0}
+.section-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin-bottom:10px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.15;color:var(--navy);margin-bottom:14px;max-width:26ch}
+.section-lede{color:var(--muted);font-size:15px;line-height:1.6;max-width:58ch;margin-bottom:40px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule)}
+@media(max-width:780px){.services{grid-template-columns:1fr}}
+.service{background:var(--cream);padding:28px 24px;transition:background .2s}
+.service:hover{background:var(--warm)}
+.service-icon{font-size:24px;margin-bottom:12px}
+.service h3{font-family:'DM Serif Display',serif;font-size:17px;color:var(--navy);margin-bottom:6px}
+.service p{font-size:13px;color:var(--muted);line-height:1.55}
+
+/* Sectors */
+.sectors{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px}
+@media(max-width:600px){.sectors{grid-template-columns:1fr}}
+.sector-chip{background:var(--warm);border:1px solid var(--rule);padding:14px 18px;display:flex;align-items:center;gap:10px}
+.sector-chip span{font-size:13px;font-weight:500;color:var(--navy)}
+
+/* Accreditations */
+.accreds{background:var(--navy);color:white;padding:48px 0}
+.accreds-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:24px;text-align:center}
+.accred-list{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.accred{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:16px 24px;text-align:center;min-width:120px}
+.accred-name{font-size:13px;font-weight:700;color:var(--yellow);letter-spacing:.06em;margin-bottom:2px}
+.accred-desc{font-size:11px;color:rgba(255,255,255,.5)}
+
+/* Contact */
+.contact{padding:72px 0;border-top:1px solid var(--rule)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:780px){.contact-grid{grid-template-columns:1fr}}
+
+/* Footer */
+footer{background:var(--navy);color:rgba(255,255,255,.5);padding:24px 0;font-size:13px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-inner a{color:var(--yellow)}
+</style>
+</head>
+<body>
+
+<!-- Demo banner -->
+<div class="demo-banner">
+  <strong>Forgio demo</strong> · This website depicts a fictional company for demonstration purposes only and does not represent any real business, product, or service. Enter your real contact details if you'd like Forgio to follow up with you. — <a href="/">back to Forgio</a>
+</div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="c">
+    <div class="topbar-inner">
+      <div>☎ +44 (0) 113 555 0180 · Mon–Fri, 7am–5pm · Emergency: 0800 555 0190</div>
+      <div class="cert-badges">
+        <span>NICEIC APPROVED</span>
+        <span>·</span>
+        <span>18TH EDITION</span>
+        <span>·</span>
+        <span>ATEX CERTIFIED</span>
+        <span>·</span>
+        <span>ISO 9001</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="c">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-bolt">⚡</div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Meridian Electrical</span>
+          <span class="logo-sub">Leeds · Est. 1994</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#services" class="active">Services</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#accreds">Accreditations</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="nav-cta btn btn-yellow">Get a quote →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="c">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">Industrial electrical contractors · Yorkshire & nationwide</div>
+        <h1>Industrial electrical,<br/><em>built to spec.</em></h1>
+        <p class="hero-sub">Control panel builds, ATEX hazardous area installations, machine wiring, 18th edition testing and inspection. NICEIC approved contractor serving manufacturing, food processing, chemical, and process industries across the UK.</p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn btn-yellow">Start your enquiry →</a>
+          <a href="#services" class="btn btn-ghost">Our services</a>
+        </div>
+      </div>
+      <div class="hero-fig">
+        <svg class="elec-diagram" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Control panel outline -->
+          <rect x="60" y="40" width="280" height="240" rx="4" stroke="rgba(245,197,24,.3)" stroke-width="1.5"/>
+          <rect x="60" y="40" width="280" height="36" fill="rgba(245,197,24,.08)" rx="4"/>
+          <text x="200" y="63" fill="rgba(245,197,24,.8)" font-family="monospace" font-size="11" text-anchor="middle" letter-spacing="2">MCC PANEL — MP-001</text>
+
+          <!-- Bus bars -->
+          <line x1="100" y1="100" x2="300" y2="100" stroke="rgba(245,197,24,.5)" stroke-width="3"/>
+          <line x1="100" y1="110" x2="300" y2="110" stroke="rgba(245,197,24,.5)" stroke-width="3"/>
+          <line x1="100" y1="120" x2="300" y2="120" stroke="rgba(245,197,24,.5)" stroke-width="3"/>
+          <text x="310" y="113" fill="rgba(255,255,255,.4)" font-family="monospace" font-size="9">3Ø 400V</text>
+
+          <!-- Circuit breakers -->
+          <rect x="95" y="135" width="30" height="48" rx="2" fill="rgba(26,31,46,1)" stroke="rgba(245,197,24,.4)" stroke-width="1"/>
+          <rect x="100" y="140" width="20" height="8" rx="1" fill="rgba(245,197,24,.6)"/>
+          <text x="110" y="192" fill="rgba(255,255,255,.5)" font-family="monospace" font-size="8" text-anchor="middle">CB1</text>
+
+          <rect x="145" y="135" width="30" height="48" rx="2" fill="rgba(26,31,46,1)" stroke="rgba(245,197,24,.4)" stroke-width="1"/>
+          <rect x="150" y="140" width="20" height="8" rx="1" fill="rgba(245,197,24,.6)"/>
+          <text x="160" y="192" fill="rgba(255,255,255,.5)" font-family="monospace" font-size="8" text-anchor="middle">CB2</text>
+
+          <rect x="195" y="135" width="30" height="48" rx="2" fill="rgba(26,31,46,1)" stroke="rgba(245,197,24,.4)" stroke-width="1"/>
+          <rect x="200" y="140" width="20" height="8" rx="1" fill="rgba(52,211,153,.6)"/>
+          <text x="210" y="192" fill="rgba(255,255,255,.5)" font-family="monospace" font-size="8" text-anchor="middle">CB3</text>
+
+          <rect x="245" y="135" width="30" height="48" rx="2" fill="rgba(26,31,46,1)" stroke="rgba(245,197,24,.4)" stroke-width="1"/>
+          <rect x="250" y="140" width="20" height="8" rx="1" fill="rgba(239,68,68,.5)"/>
+          <text x="260" y="192" fill="rgba(255,255,255,.5)" font-family="monospace" font-size="8" text-anchor="middle">CB4</text>
+
+          <!-- PLC box -->
+          <rect x="95" y="205" width="100" height="60" rx="2" fill="rgba(26,31,46,1)" stroke="#3b82f6" stroke-width="1"/>
+          <text x="145" y="220" fill="#3b82f6" font-family="monospace" font-size="8" text-anchor="middle" letter-spacing="1">SIEMENS S7-1500</text>
+          <rect x="103" y="226" width="12" height="8" rx="1" fill="#3b82f6" opacity=".7"/>
+          <rect x="120" y="226" width="12" height="8" rx="1" fill="#3b82f6" opacity=".4"/>
+          <rect x="137" y="226" width="12" height="8" rx="1" fill="#22c55e" opacity=".7"/>
+          <rect x="154" y="226" width="12" height="8" rx="1" fill="#3b82f6" opacity=".4"/>
+          <text x="145" y="252" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="7" text-anchor="middle">PROFINET I/O</text>
+          <text x="145" y="262" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="7" text-anchor="middle">CPU 1515-2 PN</text>
+
+          <!-- HMI -->
+          <rect x="210" y="205" width="110" height="60" rx="2" fill="rgba(26,31,46,1)" stroke="rgba(245,197,24,.3)" stroke-width="1"/>
+          <rect x="215" y="210" width="100" height="48" rx="1" fill="#0f172a"/>
+          <text x="265" y="230" fill="rgba(245,197,24,.7)" font-family="monospace" font-size="7" text-anchor="middle">STATUS: RUNNING</text>
+          <text x="265" y="242" fill="#22c55e" font-family="monospace" font-size="7" text-anchor="middle">■ LINE 1 OK</text>
+          <text x="265" y="254" fill="#22c55e" font-family="monospace" font-size="7" text-anchor="middle">■ LINE 2 OK</text>
+
+          <!-- Connection lines -->
+          <line x1="110" y1="183" x2="110" y2="205" stroke="rgba(245,197,24,.2)" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="160" y1="183" x2="145" y2="205" stroke="rgba(245,197,24,.2)" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="c">
+    <div class="stats-inner">
+      <div class="stat"><div class="stat-num">30<em>yrs</em></div><div class="stat-label">Industrial electrical experience</div></div>
+      <div class="stat"><div class="stat-num">600<em>+</em></div><div class="stat-label">Panel builds completed</div></div>
+      <div class="stat"><div class="stat-num">ATEX</div><div class="stat-label">Zone 1 & 2 certified</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Emergency breakdown cover</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="std" id="services">
+  <div class="c">
+    <div class="section-eyebrow">— What we do</div>
+    <h2 class="section-title">Industrial electrical from design to commissioning.</h2>
+    <p class="section-lede">From MCC panel builds to full ATEX hazardous area installations, we handle every aspect of industrial electrical work — designed, installed, and certified to BS 7671:2018.</p>
+    <div class="services">
+      <div class="service">
+        <div class="service-icon">⚙️</div>
+        <h3>Control panel builds</h3>
+        <p>MCC, PLC, VSD, distribution boards and bespoke enclosures. Siemens, Allen-Bradley, Schneider, Mitsubishi. CE marked to BS EN 61439.</p>
+      </div>
+      <div class="service">
+        <div class="service-icon">⚡</div>
+        <h3>Site installation</h3>
+        <p>Cable installation, SWA, LSOH, FP200, MICC. Cable tray, ladder, trunking, conduit. Complete terminations and labelling to client schedules.</p>
+      </div>
+      <div class="service">
+        <div class="service-icon">🔥</div>
+        <h3>ATEX hazardous areas</h3>
+        <p>Zone 1 and Zone 2 gas installations. Zone 21 and 22 dust environments. Ex-rated equipment selection, installation and certification to IECEx/ATEX.</p>
+      </div>
+      <div class="service">
+        <div class="service-icon">🖥️</div>
+        <h3>PLC & control systems</h3>
+        <p>PLC programming, HMI design, SCADA integration, instrumentation, fieldbus — Profibus, Profinet, DeviceNet, EtherNet/IP.</p>
+      </div>
+      <div class="service">
+        <div class="service-icon">🔍</div>
+        <h3>Testing & inspection</h3>
+        <p>18th edition periodic inspection (EICR), initial verification, thermographic surveys, PAT testing, insurance inspections.</p>
+      </div>
+      <div class="service">
+        <div class="service-icon">📋</div>
+        <h3>Planned maintenance</h3>
+        <p>PPM contracts for industrial sites. Electrical switchgear servicing, thermographic inspection, infrared surveys, annual test and inspection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sectors -->
+<section class="std" id="sectors" style="background:var(--warm);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:56px 0">
+  <div class="c">
+    <div class="section-eyebrow">— Industries we serve</div>
+    <h2 class="section-title">Built for industrial environments.</h2>
+    <p class="section-lede">We work across manufacturing, process, food and chemical industries where electrical installations must meet stringent safety, compliance, and uptime requirements.</p>
+    <div class="sectors">
+      <div class="sector-chip"><span>⚙️</span><span>Automotive manufacturing</span></div>
+      <div class="sector-chip"><span>🧪</span><span>Chemical & process plant</span></div>
+      <div class="sector-chip"><span>🍽️</span><span>Food & beverage production</span></div>
+      <div class="sector-chip"><span>💊</span><span>Pharmaceutical & cleanroom</span></div>
+      <div class="sector-chip"><span>🔧</span><span>Engineering & fabrication</span></div>
+      <div class="sector-chip"><span>📦</span><span>Warehousing & logistics</span></div>
+      <div class="sector-chip"><span>💧</span><span>Water & utilities</span></div>
+      <div class="sector-chip"><span>⚡</span><span>Power generation & distribution</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Accreditations -->
+<div class="accreds" id="accreds">
+  <div class="c">
+    <div class="accreds-title">Approved contractor · Certified to industry standards</div>
+    <div class="accred-list">
+      <div class="accred"><div class="accred-name">NICEIC</div><div class="accred-desc">Approved Contractor</div></div>
+      <div class="accred"><div class="accred-name">ECA</div><div class="accred-desc">Member</div></div>
+      <div class="accred"><div class="accred-name">ATEX</div><div class="accred-desc">Zone 1 & 2 Certified</div></div>
+      <div class="accred"><div class="accred-name">ISO 9001</div><div class="accred-desc">Quality Management</div></div>
+      <div class="accred"><div class="accred-name">BS 7671</div><div class="accred-desc">18th Edition</div></div>
+      <div class="accred"><div class="accred-name">CSCS</div><div class="accred-desc">Gold Card Holders</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact / Enquiry -->
+<section class="contact" id="contact">
+  <div class="c">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow">— Start your enquiry</div>
+        <h2 class="section-title">Get a quote for your electrical project.</h2>
+        <p class="section-lede">Use the Forgio assistant in the corner to tell us about your project. It'll gather the technical details our estimators need — supply voltage, scope, site conditions, ATEX requirements — so we can get a proper quote back to you faster.</p>
+        <div style="margin-top:28px;padding:20px 24px;background:var(--warm);border-left:3px solid var(--yellow)">
+          <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px">Why use the assistant?</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.55">Our estimators need specific technical information before they can quote accurately — supply details, ATEX zone classification, PLC type, site access, shutdown constraints. The assistant gathers all of this upfront so you get a real quote, not a "we'll need to ask a few questions first."</div>
+        </div>
+      </div>
+      <div>
+        <div style="background:white;border:1px solid var(--rule);padding:32px;border-radius:2px">
+          <div class="section-eyebrow">— Or use the form</div>
+          <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:18px">Send an enquiry</h3>
+          <form onsubmit="event.preventDefault();alert('This is a demo site. Try the Forgio assistant in the bottom-right corner.')">
+            <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase">Name</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+            <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase">Company</label><input style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px"/></div>
+            <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase">Email</label><input type="email" style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px" required/></div>
+            <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase">Project details</label><textarea style="width:100%;padding:9px 11px;border:1px solid var(--rule);font-family:inherit;font-size:14px;border-radius:2px;min-height:80px;resize:vertical" placeholder="Briefly describe your electrical project..."></textarea></div>
+            <button type="submit" style="width:100%;padding:11px;background:var(--navy);color:white;font-size:14px;font-weight:600;border:none;border-radius:2px;cursor:pointer">Send enquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="c">
+    <div class="footer-inner">
+      <div>© 2026 Meridian Electrical Services Ltd · Company No. 02987641 · VAT GB 441 8820 17 · Leeds, West Yorkshire</div>
+      <div>Demo site · powered by <a href="https://forgio.co.uk">Forgio</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://forgio.co.uk/widget.js"
+  data-api-url="https://forgio-backend-production.up.railway.app"
+  data-template="electrical"
+  data-demo="true"
+  data-tenant="meridian-electrical-demo"
+  data-launcher-text="Get a quote"
+></script>
+</body>
+</html>
