@@ -464,13 +464,13 @@
       display: flex;
       align-items: flex-end;
       gap: 8px;
-      background: #141414;
-      border: 1px solid #1F1F1F;
+      background: #1E1E1E;
+      border: 1px solid #34342F;
       border-radius: 14px;
       padding: 4px 4px 4px 10px;
       transition: border-color 0.15s;
     }
-    .input-row:focus-within { border-color: #2A2A2A; }
+    .input-row:focus-within { border-color: ${CONFIG.color}; }
 
     .attach-btn {
       width: 36px;
@@ -655,6 +655,14 @@
       transition: color 0.15s;
     }
     .success-actions button:hover { color: #F5F1EB; }
+    .success-actions .offer-primary {
+      background: ${CONFIG.color};
+      color: #0A0A0A;
+      font-weight: 500;
+      border-radius: 999px;
+      padding: 12px;
+    }
+    .success-actions .offer-primary:hover { color: #0A0A0A; opacity: 0.92; }
 
     /* ---------- Error state ---------- */
     .error-banner {
@@ -880,6 +888,11 @@
     streaming: false,
     finalRfq: null,
     quote: null,      // v0.2: meta.quote from finalize (customer-facing price block)
+    successMode: null,// 'price' | 'offer' | 'waiting' | 'timeout' | 'declined' | 'received'
+    priceResult: null,// the approved customer figure (from auto-approve or poll)
+    pollToken: null,  // read-only token to poll quote status
+    pollTimer: null,
+    pollStart: 0,
   };
 
   // ---------- Render ----------
@@ -939,8 +952,7 @@
     } else if (state.phase === 'submitting') {
       body.innerHTML = loadingHTML();
     } else if (state.phase === 'success') {
-      body.innerHTML = successHTML(state.finalRfq?.headline, state.quote);
-      shadow.getElementById('success-close').addEventListener('click', close);
+      renderSuccess();
     }
   }
 
@@ -950,6 +962,7 @@
   }
 
   function close() {
+    if (state.pollTimer) { clearTimeout(state.pollTimer); state.pollTimer = null; }
     if (state.phase === "success" || state.phase === "error") {
       state.phase = "welcome";
       state.messages = [];
@@ -957,9 +970,112 @@
       state.streaming = false;
       state.finalRfq = null;
       state.quote = null;
+      state.successMode = null;
+      state.priceResult = null;
+      state.pollToken = null;
     }
     state.open = false;
     render();
+  }
+
+  // ---------- Success screen state machine ----------
+  function priceFmt(c) {
+    try {
+      return new Intl.NumberFormat('en-GB', {
+        style: 'currency', currency: c.currency || 'GBP',
+      }).format(Number(c.total) || 0);
+    } catch (_e) { return (c.currency || 'GBP') + ' ' + (Number(c.total) || 0); }
+  }
+
+  function renderSuccess() {
+    const body = shadow.getElementById('body');
+    if (!body) return;
+    const headline = state.finalRfq && state.finalRfq.headline;
+    const check = '<div class="success-check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+    const chip = headline ? html`<div class="success-headline"><div class="success-headline-label">Your enquiry</div>${escapeHTML(headline)}</div>` : '';
+    const closeBtn = html`<div class="success-actions"><button id="success-close">Close</button></div>`;
+    let inner = '';
+    const mode = state.successMode;
+
+    if (mode === 'price') {
+      const c = state.priceResult || (state.quote && state.quote.customer) || {};
+      inner = html`
+        ${check}
+        <h2 class="success-title">Your <em>indicative price</em></h2>
+        <div class="quote-price">${priceFmt(c)}<span class="exvat">ex-VAT</span></div>
+        ${c.lead_time_days ? html`<p class="success-body" style="margin-top:-4px">Lead time approx ${c.lead_time_days} days.</p>` : ''}
+        <div class="quote-disclaimer">${escapeHTML(c.disclaimer || '')}</div>
+        ${chip}
+        ${closeBtn}`;
+    } else if (mode === 'offer') {
+      inner = html`
+        ${check}
+        <h2 class="success-title">Enquiry <em>received</em>.</h2>
+        <p class="success-body">I can ask one of our engineers for an indicative figure right now, if you'd like — subject to a site survey and written confirmation.</p>
+        <div class="success-actions">
+          <button id="offer-yes" class="offer-primary">Yes — ask for an indicative price</button>
+          <button id="offer-no">No thanks, I'll wait for the team</button>
+        </div>
+        ${chip}`;
+    } else if (mode === 'waiting') {
+      inner = html`
+        <div class="spinner"></div>
+        <h2 class="success-title" style="font-size:20px">Asking an engineer…</h2>
+        <p class="success-body">This usually only takes a moment. Hang tight — I'll show your figure here as soon as it's confirmed.</p>`;
+    } else if (mode === 'timeout') {
+      inner = html`
+        ${check}
+        <h2 class="success-title">Almost there.</h2>
+        <p class="success-body">Our engineer isn't free to confirm a figure this very second — they'll come back to you shortly with your price.</p>
+        ${chip}
+        ${closeBtn}`;
+    } else if (mode === 'declined') {
+      inner = html`
+        ${check}
+        <h2 class="success-title">Enquiry <em>received</em>.</h2>
+        <p class="success-body">An engineer will be in touch with your quote shortly.</p>
+        ${chip}
+        ${closeBtn}`;
+    } else { // 'received'
+      inner = html`
+        ${check}
+        <h2 class="success-title">Enquiry <em>received</em>.</h2>
+        <p class="success-body">An engineer will review the details and be in touch shortly.</p>
+        ${chip}
+        ${closeBtn}`;
+    }
+
+    body.innerHTML = html`<div class="success">${inner}</div>`;
+    const cl = shadow.getElementById('success-close');
+    if (cl) cl.addEventListener('click', close);
+    const yes = shadow.getElementById('offer-yes');
+    if (yes) yes.addEventListener('click', startPricePoll);
+    const no = shadow.getElementById('offer-no');
+    if (no) no.addEventListener('click', () => { state.successMode = 'received'; renderSuccess(); });
+  }
+
+  function startPricePoll() {
+    if (!state.pollToken) { state.successMode = 'received'; renderSuccess(); return; }
+    state.successMode = 'waiting';
+    state.pollStart = Date.now();
+    renderSuccess();
+    pollTick();
+  }
+
+  function pollTick() {
+    if (state.successMode !== 'waiting') return; // stopped (closed / resolved)
+    if (Date.now() - state.pollStart > 90000) { state.successMode = 'timeout'; renderSuccess(); return; }
+    fetch(`${CONFIG.apiUrl}/quote/status/${encodeURIComponent(state.pollToken)}`)
+      .then((r) => r.json())
+      .then((s) => {
+        if (state.successMode !== 'waiting') return;
+        if (s.status === 'approved' && s.customer) {
+          state.priceResult = s.customer; state.successMode = 'price'; renderSuccess(); return;
+        }
+        if (s.status === 'declined') { state.successMode = 'declined'; renderSuccess(); return; }
+        state.pollTimer = setTimeout(pollTick, 3000);
+      })
+      .catch(() => { state.pollTimer = setTimeout(pollTick, 3000); });
   }
 
   // ---------- Welcome → Chat ----------
@@ -1239,6 +1355,18 @@
       const data = await r.json();
       state.finalRfq = data.rfq;
       state.quote = (data.meta && data.meta.quote) ? data.meta.quote : null; // v0.2
+      state.pollToken = (state.quote && state.quote.poll_token) ? state.quote.poll_token : null;
+      const q = state.quote;
+      if (q && q.show_to_customer && q.customer && q.customer.mode === 'price') {
+        // already auto-approved — show the figure straight away
+        state.priceResult = q.customer;
+        state.successMode = 'price';
+      } else if (q && q.show_to_customer && q.poll_token) {
+        // pricing is offered; engineer review pending — offer the live price
+        state.successMode = 'offer';
+      } else {
+        state.successMode = 'received';
+      }
       state.phase = 'success';
       render();
     } catch (err) {
