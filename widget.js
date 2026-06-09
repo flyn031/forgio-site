@@ -1,5 +1,5 @@
 /**
- * Forgio Widget v0.1.0
+ * Forgio Widget v0.2.0
  * The AI pre-sales engineer that drops into any industrial business website.
  *
  * Usage:
@@ -15,6 +15,11 @@
  *   data-color="#FF6B35"                          (override accent colour)
  *
  * The widget mounts itself automatically when the script loads.
+ *
+ * v0.2: shows the customer an indicative price (or "we'll confirm in 48h")
+ *       on the success screen, with a disclaimer — but ONLY when the backend
+ *       says so (per-tenant "show price to customer" toggle in /admin/quoting).
+ *       Also exposes window.Forgio.open() / .close() for host-page buttons.
  */
 
 (function () {
@@ -105,6 +110,13 @@
     .launcher:hover {
       transform: translateY(-2px);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+    .launcher.shake { animation: forgio-shake 0.5s cubic-bezier(.36,.07,.19,.97); }
+    @keyframes forgio-shake {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-4px); }
+      40%, 60% { transform: translateX(4px); }
     }
     .launcher-dot {
       width: 10px;
@@ -557,6 +569,7 @@
       text-align: center;
       background:
         radial-gradient(circle at 50% 30%, ${CONFIG.color}15, transparent 60%);
+      overflow-y: auto;
     }
     .success-check {
       width: 60px;
@@ -569,6 +582,7 @@
       justify-content: center;
       color: ${CONFIG.color};
       animation: pop-in 0.5s cubic-bezier(0.4, 1.6, 0.4, 1);
+      flex-shrink: 0;
     }
     @keyframes pop-in {
       0% { transform: scale(0); opacity: 0; }
@@ -599,6 +613,33 @@
       color: ${CONFIG.color};
       margin-bottom: 4px;
     }
+
+    /* ---------- Customer-facing indicative price ---------- */
+    .quote-price {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: #F5F1EB;
+      font-weight: 400;
+    }
+    .quote-price .exvat {
+      font-family: 'Geist', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0;
+      color: #8B857B;
+      margin-left: 4px;
+    }
+    .quote-disclaimer {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #8B857B;
+      max-width: 34ch;
+      margin-top: 6px;
+      border-top: 1px solid #1F1F1F;
+      padding-top: 12px;
+    }
+
     .success-actions {
       margin-top: 12px;
       display: flex;
@@ -759,7 +800,43 @@
     `;
   }
 
-  function successHTML(headline) {
+  // Build the customer-facing quote block, but ONLY if the backend says to show it.
+  // quote = meta.quote returned from /api/rfq/finalize:
+  //   { status, show_to_customer, customer: { mode:'price'|'pending', total, currency,
+  //                                            lead_time_days, valid_until, disclaimer } | null }
+  function quoteBlockHTML(quote) {
+    const c = (quote && quote.show_to_customer && quote.customer) ? quote.customer : null;
+    if (!c) return null;
+    if (c.mode === 'price') {
+      let price = '';
+      try {
+        price = new Intl.NumberFormat('en-GB', {
+          style: 'currency', currency: c.currency || 'GBP',
+        }).format(Number(c.total) || 0);
+      } catch (_e) { price = (c.currency || 'GBP') + ' ' + (Number(c.total) || 0); }
+      return {
+        title: html`Your <em>indicative price</em>`,
+        body: '',
+        extra: html`
+          <div class="quote-price">${price}<span class="exvat">ex-VAT</span></div>
+          ${c.lead_time_days ? html`<p class="success-body" style="margin-top:-6px">Lead time approx ${c.lead_time_days} days.</p>` : ''}
+          <div class="quote-disclaimer">${escapeHTML(c.disclaimer || '')}</div>
+        `,
+      };
+    }
+    // pending review
+    return {
+      title: html`Enquiry <em>received</em>.`,
+      body: "Thanks — we'll confirm your pricing within 48 hours.",
+      extra: c.disclaimer ? html`<div class="quote-disclaimer">${escapeHTML(c.disclaimer)}</div>` : '',
+    };
+  }
+
+  function successHTML(headline, quote) {
+    const q = quoteBlockHTML(quote);
+    const title = q ? q.title : html`Enquiry <em>received</em>.`;
+    const body = q ? q.body : 'An engineer will review the details and be in touch shortly.';
+    const extra = q ? q.extra : '';
     return html`
       <div class="success">
         <div class="success-check">
@@ -767,14 +844,13 @@
             <path d="M5 12L10 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h2 class="success-title">Enquiry <em>received</em>.</h2>
-        <p class="success-body">
-          An engineer will review the details and be in touch shortly.
-        </p>
+        <h2 class="success-title">${title}</h2>
+        ${body ? html`<p class="success-body">${body}</p>` : ''}
+        ${extra}
         ${headline ? html`
           <div class="success-headline">
             <div class="success-headline-label">Your enquiry</div>
-            ${headline}
+            ${escapeHTML(headline)}
           </div>
         ` : ''}
         <div class="success-actions">
@@ -803,6 +879,7 @@
     pendingFiles: [], // [{ file_id, filename, size }]
     streaming: false,
     finalRfq: null,
+    quote: null,      // v0.2: meta.quote from finalize (customer-facing price block)
   };
 
   // ---------- Render ----------
@@ -862,7 +939,7 @@
     } else if (state.phase === 'submitting') {
       body.innerHTML = loadingHTML();
     } else if (state.phase === 'success') {
-      body.innerHTML = successHTML(state.finalRfq?.headline);
+      body.innerHTML = successHTML(state.finalRfq?.headline, state.quote);
       shadow.getElementById('success-close').addEventListener('click', close);
     }
   }
@@ -879,6 +956,7 @@
       state.pendingFiles = [];
       state.streaming = false;
       state.finalRfq = null;
+      state.quote = null;
     }
     state.open = false;
     render();
@@ -1160,6 +1238,7 @@
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       const data = await r.json();
       state.finalRfq = data.rfq;
+      state.quote = (data.meta && data.meta.quote) ? data.meta.quote : null; // v0.2
       state.phase = 'success';
       render();
     } catch (err) {
@@ -1181,6 +1260,15 @@
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   }
+
+  // ---------- Public API (for host-page "Get a quote" buttons) ----------
+  window.Forgio = window.Forgio || {};
+  window.Forgio.open = function () { if (!state.open) open(); };
+  window.Forgio.close = function () { if (state.open) close(); };
+  window.Forgio.shake = function () {
+    const l = shadow.getElementById('launcher');
+    if (l) { l.classList.remove('shake'); void l.offsetWidth; l.classList.add('shake'); }
+  };
 
   // ---------- Boot ----------
   render();
