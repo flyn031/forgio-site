@@ -541,6 +541,23 @@
       background: ${CONFIG.color}10;
       border-color: ${CONFIG.color};
     }
+    .submit-btn.submit-price {
+      background: ${CONFIG.color};
+      color: #0A0A0A;
+      border: none;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .submit-btn.submit-price:hover { opacity: 0.92; background: ${CONFIG.color}; }
+    .submit-plain {
+      width: 100%;
+      padding: 8px;
+      background: transparent;
+      color: #8B857B;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+    .submit-plain:hover { color: #F5F1EB; }
 
     .footer-line {
       text-align: center;
@@ -766,14 +783,7 @@
   function chatHTML() {
     return html`
       <div class="chat" id="chat"></div>
-      <div id="submit-bar" style="display:none;" class="submit-bar">
-        <button class="submit-btn" id="submit-btn">
-          <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-            <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Submit enquiry to engineering team
-        </button>
-      </div>
+      <div id="submit-bar" style="display:none;" class="submit-bar"></div>
       <div class="input-area">
         <div class="input-files" id="pending-files"></div>
         <div class="input-row">
@@ -888,6 +898,7 @@
     streaming: false,
     finalRfq: null,
     quote: null,      // v0.2: meta.quote from finalize (customer-facing price block)
+    offerLivePrice: false, // v0.3: does this tenant offer the customer a live price?
     successMode: null,// 'price' | 'offer' | 'waiting' | 'timeout' | 'declined' | 'received'
     priceResult: null,// the approved customer figure (from auto-approve or poll)
     pollToken: null,  // read-only token to poll quote status
@@ -1165,7 +1176,6 @@
       attachBtn.addEventListener('click', () => fileInput.click());
       fileInput.addEventListener('change', handleFiles);
     }
-    if (submitBtn) submitBtn.addEventListener('click', finaliseEnquiry);
   }
 
   async function sendMessage() {
@@ -1213,6 +1223,7 @@
           messages: payload,
           template: CONFIG.template,
           demo: CONFIG.demo,
+          offer_price: state.offerLivePrice,
         }),
       });
 
@@ -1330,12 +1341,29 @@
   function maybeShowSubmit() {
     const bar = shadow.getElementById('submit-bar');
     if (!bar) return;
-    // Show submit button after 4+ exchanges (2 from each side)
     const userTurns = state.messages.filter(m => m.role === 'user').length;
-    if (userTurns >= 3) bar.style.display = 'block';
+    if (userTurns < 3) return;
+    if (bar.dataset.ready !== '1') {
+      if (state.offerLivePrice) {
+        bar.innerHTML =
+          '<button class="submit-btn submit-price" id="submit-price">Yes — get my indicative price</button>'
+          + '<button class="submit-plain" id="submit-plain">No thanks, just submit my enquiry</button>';
+        bar.querySelector('#submit-price').addEventListener('click', () => finaliseEnquiry({ wantPrice: true }));
+        bar.querySelector('#submit-plain').addEventListener('click', () => finaliseEnquiry({ wantPrice: false }));
+      } else {
+        bar.innerHTML =
+          '<button class="submit-btn" id="submit-btn">'
+          + '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+          + 'Submit enquiry to engineering team</button>';
+        bar.querySelector('#submit-btn').addEventListener('click', () => finaliseEnquiry({ wantPrice: false }));
+      }
+      bar.dataset.ready = '1';
+    }
+    bar.style.display = 'block';
   }
 
-  async function finaliseEnquiry() {
+  async function finaliseEnquiry(opts) {
+    const wantPrice = !!(opts && opts.wantPrice);
     state.phase = 'submitting';
     render();
     try {
@@ -1357,18 +1385,27 @@
       state.quote = (data.meta && data.meta.quote) ? data.meta.quote : null; // v0.2
       state.pollToken = (state.quote && state.quote.poll_token) ? state.quote.poll_token : null;
       const q = state.quote;
-      if (q && q.show_to_customer && q.customer && q.customer.mode === 'price') {
+      const autoPrice = q && q.show_to_customer && q.customer && q.customer.mode === 'price';
+      state.phase = 'success';
+      if (autoPrice) {
         // already auto-approved — show the figure straight away
         state.priceResult = q.customer;
         state.successMode = 'price';
+        render();
+      } else if (wantPrice && state.pollToken && q && q.show_to_customer) {
+        // customer asked for a price — go straight into the waiting state and poll
+        state.successMode = 'waiting';
+        state.pollStart = Date.now();
+        render();
+        pollTick();
       } else if (q && q.show_to_customer && q.poll_token) {
-        // pricing is offered; engineer review pending — offer the live price
+        // pricing available but customer hasn't opted in yet — offer it
         state.successMode = 'offer';
+        render();
       } else {
         state.successMode = 'received';
+        render();
       }
-      state.phase = 'success';
-      render();
     } catch (err) {
       state.phase = 'chat';
       render();
@@ -1399,5 +1436,11 @@
   };
 
   // ---------- Boot ----------
+  // Learn this tenant's mode (does it offer the customer a live price?)
+  fetch(`${CONFIG.apiUrl}/api/tenant-config/${encodeURIComponent(CONFIG.tenant)}`)
+    .then((r) => r.json())
+    .then((d) => { state.offerLivePrice = !!(d && d.offer_live_price); })
+    .catch(() => { /* default false — behaves as a plain enquiry bot */ });
+
   render();
 })();
